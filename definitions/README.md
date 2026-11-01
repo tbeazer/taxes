@@ -124,6 +124,9 @@ A deduction of up to 20% of profit from a sole proprietorship, rental or pass-th
 **SALT deduction**  
 The itemized deduction for state and local taxes: income or sales tax, real estate tax and personal property tax. It has an annual cap.
 
+**Senior deduction**  
+A deduction for taxpayers 65 or older, new for 2025 through 2028, claimed on Schedule 1-A whether or not you itemize. It shrinks at higher incomes.
+
 **Standard deduction**  
 A fixed amount, based on filing status, age and blindness, that you can subtract instead of listing actual expenses. Most people take it.
 
@@ -181,6 +184,9 @@ An amount subtracted directly from your tax, dollar for dollar. A $1,000 credit 
 
 **Credit for other dependents (ODC)**  
 A smaller nonrefundable credit for dependents who don't qualify for the child tax credit, such as older children or a parent you support.
+
+**Credit for the elderly or disabled**  
+A nonrefundable credit for people 65 or older, or retired on permanent and total disability, with low income. Figured on Schedule R.
 
 **Earned income credit (EIC / EITC)**  
 A refundable credit for workers with low to moderate income. It's larger with qualifying children, and there are limits on income, investment income and age.
@@ -267,6 +273,9 @@ A series of regular payments, usually for life or for a set number of years.
 **Basis**  
 Money already taxed that you put into an investment or retirement account. It comes back to you tax-free. For IRAs, basis is tracked on Form 8606.
 
+**Catch-up contribution**  
+An extra amount people 50 and older can put into an IRA or workplace plan on top of the regular yearly limit.
+
 **Compensation (for IRAs)**  
 Pay from work that you can base an IRA contribution on: wages, tips, self-employment earnings, and alimony under pre-2019 agreements. Interest, dividends and pensions don't count.
 
@@ -275,6 +284,9 @@ A withdrawal from a retirement account before age 59½. Usually subject to a 10%
 
 **Pension**  
 Regular payments from an employer's retirement plan after you retire.
+
+**Qualified charitable distribution (QCD)**  
+A gift sent straight from your IRA to a charity once you're 70½ or older. It isn't counted as income and can count toward your required minimum distribution, but it can't also be deducted as a charitable gift.
 
 **Required minimum distribution (RMD)**  
 The minimum amount you must withdraw each year from most retirement accounts once you reach the required age.

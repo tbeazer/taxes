@@ -11,7 +11,7 @@ A public-domain study guide to the U.S. individual income tax return. Every indi
 | [`form-1040/`](form-1040/) | How Form 1040 is organized, with one subfolder per tax year |
 | [`form-1040/2025/`](form-1040/2025/) | Interactive flow map for tax year 2025: every common form, the 1040 line it feeds, 2025 limits, due diligence questions and links to the official IRS forms |
 | [`questions/`](questions/) | Questions every taxpayer has to ask, grouped by life situation, each linked to the forms it leads to |
-| [`definitions/`](definitions/) | 134 tax terms, forms and schedules in plain English |
+| [`definitions/`](definitions/) | 138 tax terms, forms and schedules in plain English |
 
 ## How a Form 1040 flows
 

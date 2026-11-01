@@ -6,7 +6,10 @@ Browse them as a searchable page: [questions/index.html](index.html).
 
 ## Your household: Who are you, and who lives with you?
 
-Your marital status on the last day of the year and who shares your home decide your filing status, which sets your standard deduction and tax rates.
+Your marital status on the last day of the year, your age, and who shares your home decide your filing status, your standard deduction, and several deductions and credits.
+
+
+### Marriage & home
 
 - Were you married on December 31? Divorced or legally separated during the year?  
   Forms: [Head of household](../form-1040/2025/index.html#hoh), [Standard deduction](../form-1040/2025/index.html#std)
@@ -20,12 +23,39 @@ Your marital status on the last day of the year and who shares your home decide 
   Forms: [Head of household](../form-1040/2025/index.html#hoh), [Dependents](../form-1040/2025/index.html#dep)
 - Who paid the rent or mortgage, utilities, repairs and food for the home? Did you pay more than half?  
   Forms: [Head of household](../form-1040/2025/index.html#hoh)
-- Were you or your spouse 65 or older (born before January 2, 1961) or blind?  
-  Forms: [Standard deduction](../form-1040/2025/index.html#std), [1040-SR](../form-1040/2025/index.html#1040sr), [Schedule 1-A](../form-1040/2025/index.html#s1a)
 - Can anyone else claim you as a dependent?  
   Forms: [Standard deduction](../form-1040/2025/index.html#std), [Dependents](../form-1040/2025/index.html#dep)
 
-Terms to know: [Filing status](../definitions/README.md), [Head of household (HOH)](../definitions/README.md), [Considered unmarried](../definitions/README.md), [Qualifying surviving spouse (QSS)](../definitions/README.md), [Standard deduction](../definitions/README.md)
+### Age
+
+- Were you or your spouse born before January 2, 1961 (age 65 or older at the end of 2025)? Is either of you blind?  
+  Forms: [Standard deduction](../form-1040/2025/index.html#std), [1040-SR](../form-1040/2025/index.html#1040sr)
+- If you're 65 or older, is your modified AGI under $75,000 ($150,000 if filing jointly)? The new senior deduction shrinks above that.  
+  Forms: [Schedule 1-A](../form-1040/2025/index.html#s1a)
+- Do you receive Social Security benefits? How much other income do you have? (It decides how much of the benefits is taxable.)  
+  Forms: [SSA-1099](../form-1040/2025/index.html#ssa)
+- Are Medicare premiums taken out of your Social Security? They can count as medical expenses if you itemize.  
+  Forms: [SSA-1099](../form-1040/2025/index.html#ssa), [Schedule A](../form-1040/2025/index.html#sa)
+- Are you 73 or older? Did you take your required minimum distribution from each IRA and retirement plan?  
+  Forms: [1099-R](../form-1040/2025/index.html#1099r)
+- Are you 70½ or older and did you give money to charity straight from an IRA (a qualified charitable distribution)?  
+  Forms: [1099-R](../form-1040/2025/index.html#1099r)
+- Do you receive a pension? How old were you when the payments started?  
+  Forms: [1099-R](../form-1040/2025/index.html#1099r)
+- Are you 50 or older? You can make larger catch-up contributions to an IRA or 401(k).  
+  Forms: [IRA deduction](../form-1040/2025/index.html#ira), [W-2](../form-1040/2025/index.html#w2)
+- Did you take money out of a retirement account before age 59½, or leave a job in the year you turned 55 or later?  
+  Forms: [1099-R](../form-1040/2025/index.html#1099r), [Form 5329](../form-1040/2025/index.html#5329)
+- Are you 65 or older (or retired on permanent disability) with low income? You may qualify for the credit for the elderly or disabled (Schedule R).  
+  Forms: [Schedule 3](../form-1040/2025/index.html#s3)
+- Are you under 25 or over 64 with no qualifying child? You can't claim the earned income credit.  
+  Forms: [Schedule EIC](../form-1040/2025/index.html#eic)
+- Are you under 24 and a full-time student, or under 19? Your parents may be able to claim you as a dependent.  
+  Forms: [Dependents](../form-1040/2025/index.html#dep), [Standard deduction](../form-1040/2025/index.html#std)
+
+Terms to know: [Filing status](../definitions/README.md), [Head of household (HOH)](../definitions/README.md), [Considered unmarried](../definitions/README.md), [Qualifying surviving spouse (QSS)](../definitions/README.md), [Standard deduction](../definitions/README.md), [Senior deduction](../definitions/README.md), [Catch-up contribution](../definitions/README.md), [Required minimum distribution (RMD)](../definitions/README.md), [Qualified charitable distribution (QCD)](../definitions/README.md), [Credit for the elderly or disabled](../definitions/README.md)
+
+Related sections: Retirement, Benefits & government payments
 
 ## Children & dependents: Who can you claim?
 
@@ -49,8 +79,12 @@ Each person you support may make you eligible for a credit or a better filing st
   Forms: [Dependents](../form-1040/2025/index.html#dep), [Head of household](../form-1040/2025/index.html#hoh)
 - Is any dependent married and filing a joint return?  
   Forms: [Dependents](../form-1040/2025/index.html#dep)
+- Is any dependent in college? See School & education for the credits and the student age rules.  
+  Forms: [Form 8863](../form-1040/2025/index.html#8863), [Dependents](../form-1040/2025/index.html#dep)
 
 Terms to know: [Dependent](../definitions/README.md), [Qualifying child](../definitions/README.md), [Qualifying relative](../definitions/README.md), [Tiebreaker rules](../definitions/README.md), [Custodial parent](../definitions/README.md), [Noncustodial parent](../definitions/README.md)
+
+Related sections: School & education, Your household
 
 ## Work & business: How did you earn money?
 
@@ -117,6 +151,8 @@ Some government payments are taxable, some are partly taxable, and some aren't i
 
 Terms to know: [Unemployment compensation](../definitions/README.md), [Social Security benefits](../definitions/README.md), [Alimony](../definitions/README.md), [Child support](../definitions/README.md), [Nontaxable income](../definitions/README.md), [Gambling winnings](../definitions/README.md)
 
+Related sections: Your household
+
 ## Retirement: Did you save for retirement or take money out?
 
 Putting money in can lower your tax or earn a credit. Taking money out is usually taxable, and early withdrawals can cost an extra 10%.
@@ -139,6 +175,8 @@ Putting money in can lower your tax or earn a credit. Taking money out is usuall
   Forms: [Form 5329](../form-1040/2025/index.html#5329), [1099-R](../form-1040/2025/index.html#1099r)
 
 Terms to know: [Traditional IRA](../definitions/README.md), [Roth IRA](../definitions/README.md), [401(k)](../definitions/README.md), [Active participant](../definitions/README.md), [Early distribution](../definitions/README.md), [Rollover](../definitions/README.md), [Simplified Method](../definitions/README.md), [Basis](../definitions/README.md)
+
+Related sections: Your household
 
 ## Your home: Do you own or rent your home?
 
@@ -171,8 +209,12 @@ College costs can earn a credit, and student loan interest can be an adjustment 
   Forms: [1098-E](../form-1040/2025/index.html#1098e)
 - Is the student someone else's dependent?  
   Forms: [Form 8863](../form-1040/2025/index.html#8863), [1098-E](../form-1040/2025/index.html#1098e), [Dependents](../form-1040/2025/index.html#dep)
+- Is the student your dependent? Only the person who claims the student can take the education credit for them, and a full-time student under 24 can still be your qualifying child.  
+  Forms: [Dependents](../form-1040/2025/index.html#dep), [Form 8863](../form-1040/2025/index.html#8863)
 
 Terms to know: [American opportunity tax credit (AOTC)](../definitions/README.md), [Lifetime learning credit (LLC)](../definitions/README.md), [Student loan interest deduction](../definitions/README.md)
+
+Related sections: Children & dependents
 
 ## Health & care: What did you pay for health care and child care?
 
