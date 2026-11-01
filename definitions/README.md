@@ -296,14 +296,14 @@ An individual retirement account you open yourself. Contributions may be deducti
 
 ## Preparer rules
 
-**Form 8867**  
-The paid preparer's due diligence checklist. Required for returns claiming the earned income credit, child tax credit, credit for other dependents, American opportunity credit, or head of household status.
-
 **Circular 230**  
 The Treasury regulations that govern practice before the IRS, including the duty to exercise due diligence in preparing returns.
 
 **Due diligence**  
 A paid preparer's duty to make reasonable inquiries, ask more questions when information seems incorrect, inconsistent or incomplete, and document the answers.
+
+**Form 8867**  
+The paid preparer's due diligence checklist. Required for returns claiming the earned income credit, child tax credit, credit for other dependents, American opportunity credit, or head of household status.
 
 **Knowledge requirement**  
 The rule that a preparer can't ignore what a reasonable preparer would know, and must ask more questions when something doesn't add up.
@@ -373,6 +373,15 @@ Figures the saver's credit.
 **Form 8962**  
 Premium Tax Credit: reconciles advance payments of the credit with the amount you qualify for.
 
+**Form SSA-1099**  
+The Social Security Administration's yearly statement of benefits paid to you.
+
+**Form W-2**  
+Wage and Tax Statement. Your employer's report of your pay and the taxes withheld.
+
+**Form W-2G**  
+Reports certain gambling winnings and any tax withheld from them.
+
 **Information return**  
 A form a bank, employer or other payer sends to both you and the IRS reporting money paid to you, such as a W-2 or 1099. The IRS matches these against your return.
 
@@ -414,15 +423,6 @@ Lists each qualifying child for the earned income credit.
 
 **Schedule SE**  
 Figures self-employment tax.
-
-**Form SSA-1099**  
-The Social Security Administration's yearly statement of benefits paid to you.
-
-**Form W-2**  
-Wage and Tax Statement. Your employer's report of your pay and the taxes withheld.
-
-**Form W-2G**  
-Reports certain gambling winnings and any tax withheld from them.
 
 ---
 
