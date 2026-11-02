@@ -8,12 +8,12 @@ A public-domain study guide to the U.S. individual income tax return. Every indi
 
 | Folder | What it covers |
 |---|---|
+| [`questions/`](questions/) | Questions every taxpayer has to ask, grouped by life situation, each linked to the forms it leads to |
+| [`resources/`](resources/) | Free IRS help for new filers and the VITA/TCE volunteer forms and guides, including the Form 13614-C intake sheet |
 | [`form-1040/`](form-1040/) | How Form 1040 is organized, with one subfolder per tax year |
 | [`form-1040/2026/`](form-1040/2026/) | Tax year 2026 (returns filed in 2027), built from the final 2026 IRS amounts and the IRS's draft 2026 forms |
 | [`form-1040/2025/`](form-1040/2025/) | Tax year 2025 (returns filed in 2026): every common form, the 1040 line it feeds, 2025 limits, due diligence questions and links to the official IRS forms |
 | [`form-1040/2024/`](form-1040/2024/) | Tax year 2024 (returns filed in 2025), a reference year from before the One Big Beautiful Bill Act changes |
-| [`resources/`](resources/) | Free IRS help for new filers and the VITA/TCE volunteer forms and guides, including the Form 13614-C intake sheet |
-| [`questions/`](questions/) | Questions every taxpayer has to ask, grouped by life situation, each linked to the forms it leads to |
 | [`definitions/`](definitions/) | 158 tax terms, forms and schedules in plain English |
 
 ## How a Form 1040 flows

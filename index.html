@@ -29,7 +29,7 @@ h2{font-family:var(--f-display);font-weight:700;font-size:24px;line-height:1.15;
 .hl{background:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 88%,transparent 88%);color:var(--hl-ink);padding:0 .2em;border-radius:2px}
 footer{font-size:12.5px;color:var(--ink-2);max-width:90ch}
 
-.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;counter-reset:s;margin:0;padding:0;list-style:none}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;counter-reset:s;margin:0;padding:0;list-style:none}
 .flow li{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:12px;min-width:0}
 .flow b{display:block;font-family:var(--f-display);font-size:17px}
 .flow span{font-family:var(--f-mono);font-size:11.5px;color:var(--accent)}
@@ -40,6 +40,8 @@ footer{font-size:12.5px;color:var(--ink-2);max-width:90ch}
 .years .soon{color:var(--ink-2);font-size:13px}
 .big{font-family:var(--f-display);font-weight:700;font-size:20px;text-decoration:none}
 .big:hover{text-decoration:underline}
+.lead .card{border-color:var(--accent);border-top-width:4px}
+.lead .big{font-size:24px}
 </style>
 </head>
 <body>
@@ -49,6 +51,18 @@ footer{font-size:12.5px;color:var(--ink-2);max-width:90ch}
     <h1>Taxes, Starting With Form 1040</h1>
     <p class="lede">A study guide to how the U.S. individual income tax return fits together. Every individual return starts with Form 1040, and nearly every other form or schedule feeds a number onto one of its lines. Each tax year gets its own map, because the law and the numbers change.</p>
   </header>
+  <div class="grid2 lead">
+    <section class="card">
+      <div class="tag">Start here</div>
+      <p style="margin:10px 0 8px"><a class="big" href="questions/index.html">Questions Every Taxpayer Has to Ask</a></p>
+      <p style="margin:0;color:var(--ink-2);font-size:14px">Questions grouped by life situation: household, work, home, school, health and more. Each one points to the forms it leads to.</p>
+    </section>
+    <section class="card">
+      <div class="tag">New to taxes?</div>
+      <p style="margin:10px 0 8px"><a class="big" href="resources/index.html">Free Help &amp; Resources</a></p>
+      <p style="margin:0;color:var(--ink-2);font-size:14px">Free IRS filing help (VITA, TCE, Free File), what to bring, the Form 13614-C intake sheet, and the guides IRS volunteers train with.</p>
+    </section>
+  </div>
   <section>
     <h2>How a Form 1040 flows</h2>
     <ol class="flow"><li><span>Lines 1–9</span><b>Income</b><p>Wages, interest, dividends, retirement income, capital gains, Schedule 1 income.</p></li><li><span>Lines 10–11</span><b>Adjustments</b><p>Above-the-line items subtracted to reach adjusted gross income (AGI).</p></li><li><span>Lines 12–15</span><b>Deductions</b><p>Standard or itemized deduction, then other deductions, to reach taxable income.</p></li><li><span>Lines 16–18</span><b>Tax</b><p>Tax from the Tax Table, plus additional taxes from Schedule 2.</p></li><li><span>Lines 19–24</span><b>Credits</b><p>Nonrefundable credits reduce the tax; other taxes are added for total tax.</p></li><li><span>Lines 25–33</span><b>Payments</b><p>Withholding, estimated payments and refundable credits.</p></li><li><span>Lines 34–38</span><b>Result</b><p>Refund if payments are more than total tax; balance due if less.</p></li></ol>
@@ -66,16 +80,6 @@ footer{font-size:12.5px;color:var(--ink-2);max-width:90ch}
       <div class="tag">Plain English</div>
       <p style="margin:10px 0 8px"><a class="big" href="definitions/index.html">Definitions</a></p>
       <p style="margin:0;color:var(--ink-2);font-size:14px">158 tax terms, forms and schedules explained in everyday language, from AGI to the tiebreaker rules.</p>
-    </section>
-    <section class="card">
-      <div class="tag">Start here</div>
-      <p style="margin:10px 0 8px"><a class="big" href="questions/index.html">Questions Every Taxpayer Has to Ask</a></p>
-      <p style="margin:0;color:var(--ink-2);font-size:14px">Questions grouped by life situation: household, work, home, school, health and more. Each one points to the forms it leads to.</p>
-    </section>
-    <section class="card">
-      <div class="tag">New to taxes?</div>
-      <p style="margin:10px 0 8px"><a class="big" href="resources/index.html">Free Help &amp; Resources</a></p>
-      <p style="margin:0;color:var(--ink-2);font-size:14px">Free IRS filing help (VITA, TCE, Free File), what to bring, the Form 13614-C intake sheet, and the guides IRS volunteers train with.</p>
     </section>
   </div>
   <footer>An independent educational project, dedicated to the public domain. It is not tax advice and is not affiliated with or endorsed by the IRS or any tax preparation company. Figures come from public IRS and federal sources; confirm them against current IRS instructions before preparing a return.</footer>
