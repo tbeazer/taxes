@@ -28,6 +28,9 @@ The One Big Beautiful Bill Act (Public Law 119-21) changed several 2025 amounts:
 | Paid preparer due diligence (Form 8867) | [Completing Form 8867](https://www.irs.gov/tax-professionals/eitc-central/completing-form-8867), [Due diligence requirements](https://www.irs.gov/tax-professionals/eitc-central/due-diligence-law-regulations-and-requirements) |
 | Form-specific rules | The IRS forms, instructions and publications linked on each card (Pubs 501, 503, 575, 590-A, 596, 915, 936, 970) |
 | Social Security wage base ($176,100) | Social Security Administration, 2025 contribution and benefit base |
+| Adoption credit maximum and phaseout | Rev. Proc. 2024-40; refundable part under Public Law 119-21 |
+| Clean vehicle credits and their September 30, 2025 end date | [Instructions for Form 8936 (2025)](https://www.irs.gov/instructions/i8936) |
+| Including a Pell grant or scholarship in income to claim the AOTC | [IRS: Interaction of scholarships and tax credits](https://www.irs.gov/pub/irs-utl/Interaction_of_Scholarships_and_Tax_Credits.pdf) and Publication 970 |
 
 ## About the due diligence questions
 

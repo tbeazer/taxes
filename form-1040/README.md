@@ -8,13 +8,16 @@ The return works top to bottom: income, minus adjustments, gives adjusted gross 
 
 | Year | Returns filed in | Map |
 |---|---|---|
+| 2026 | 2027 | [Flow map](2026/) (draft forms) |
 | 2025 | 2026 | [Flow map](2025/) |
+| 2024 | 2025 | [Flow map](2024/) |
 
 Each year has its own folder because line numbers, dollar limits and even whole forms change from year to year.
 
 ## Official IRS links
 
 - [Form 1040 (current PDF)](https://www.irs.gov/pub/irs-pdf/f1040.pdf)
+- [Draft forms (IRS)](https://www.irs.gov/draft-tax-forms)
 - [Form 1040 instructions (current PDF)](https://www.irs.gov/pub/irs-pdf/i1040gi.pdf)
 - [Prior-year forms and instructions](https://www.irs.gov/prior-year-forms-and-instructions)
 

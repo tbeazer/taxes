@@ -9,9 +9,12 @@ A public-domain study guide to the U.S. individual income tax return. Every indi
 | Folder | What it covers |
 |---|---|
 | [`form-1040/`](form-1040/) | How Form 1040 is organized, with one subfolder per tax year |
-| [`form-1040/2025/`](form-1040/2025/) | Interactive flow map for tax year 2025: every common form, the 1040 line it feeds, 2025 limits, due diligence questions and links to the official IRS forms |
+| [`form-1040/2026/`](form-1040/2026/) | Tax year 2026 (returns filed in 2027), built from the final 2026 IRS amounts and the IRS's draft 2026 forms |
+| [`form-1040/2025/`](form-1040/2025/) | Tax year 2025 (returns filed in 2026): every common form, the 1040 line it feeds, 2025 limits, due diligence questions and links to the official IRS forms |
+| [`form-1040/2024/`](form-1040/2024/) | Tax year 2024 (returns filed in 2025), a reference year from before the One Big Beautiful Bill Act changes |
+| [`resources/`](resources/) | Free IRS help for new filers and the VITA/TCE volunteer forms and guides, including the Form 13614-C intake sheet |
 | [`questions/`](questions/) | Questions every taxpayer has to ask, grouped by life situation, each linked to the forms it leads to |
-| [`definitions/`](definitions/) | 138 tax terms, forms and schedules in plain English |
+| [`definitions/`](definitions/) | 158 tax terms, forms and schedules in plain English |
 
 ## How a Form 1040 flows
 
@@ -25,8 +28,8 @@ A public-domain study guide to the U.S. individual income tax return. Every indi
 
 ## Adding a new tax year
 
-1. Copy the latest year's folder, for example `form-1040/2025/` to `form-1040/2026/`.
-2. Update the figures and line numbers from that year's IRS forms, instructions and inflation adjustment revenue procedure.
+1. Copy the latest year's folder, for example `form-1040/2026/` to `form-1040/2027/`.
+2. In the new `index.html`, update the figures and line numbers from that year's IRS forms, instructions and inflation adjustment revenue procedure. The script holds the base cards in `F`, the changes for that year in `PATCH` (edit a card, or `remove` it) and `ADD` (new cards), and the PDF link for each form in `LINKS`.
 3. Update that folder's `README.md` source list.
 4. Add the year to the table in [`form-1040/README.md`](form-1040/README.md) and to the year list in `index.html`.
 5. If a new term appears, add it to `definitions/`.

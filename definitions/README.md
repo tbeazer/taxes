@@ -4,6 +4,38 @@ Tax terms, forms and schedules in plain English. These definitions don't change 
 
 Browse them as a searchable page: [definitions/index.html](index.html).
 
+## Getting help
+
+**Form 13614-C**  
+The Intake/Interview and Quality Review Sheet used at VITA and TCE sites. You fill it out before your appointment: page 1 covers you, your marital status and your household; page 2 covers income; page 3 covers expenses and tax-related events. It's a good checklist for anyone getting ready to file.
+
+**Form 15080**  
+Consent to Disclose Tax Return Information to VITA/TCE Tax Preparation Sites. Optional permission that lets a volunteer site's software carry your information forward to next year.
+
+**Identity Protection PIN (IP PIN)**  
+A six-digit number the IRS issues to protect you from someone filing a return with your Social Security number. If you have one, it must be on your return. Anyone can request one.
+
+**Interactive Tax Assistant (ITA)**  
+Free question-and-answer tools on IRS.gov that tell you, based on your answers, things like your filing status, whether someone is your dependent, or whether you qualify for a credit.
+
+**IRS Free File**  
+Free brand-name tax software offered through IRS.gov for people under an income limit, plus fillable forms anyone can use.
+
+**Link & Learn Taxes**  
+The IRS's free online training for VITA and TCE volunteers. Anyone can use it to learn how to prepare a basic return.
+
+**Publication 17**  
+Your Federal Income Tax: the IRS's main plain-language guide to individual income tax, updated every year.
+
+**Publication 4012**  
+The VITA/TCE Volunteer Resource Guide: the IRS's quick-reference binder of charts, decision trees and software tips that volunteers use while preparing returns.
+
+**TCE (Tax Counseling for the Elderly)**  
+An IRS program of free tax help focused on people 60 and older, especially questions about pensions and retirement. Many TCE sites are run by AARP Foundation Tax-Aide.
+
+**VITA (Volunteer Income Tax Assistance)**  
+An IRS program where certified volunteers prepare and e-file basic returns for free, generally for people with low to moderate income, people with disabilities, and people with limited English.
+
 ## Filing basics
 
 **Considered unmarried**  
@@ -35,11 +67,17 @@ The calendar year the return covers. A 2025 return reports what happened from Ja
 **Alimony**  
 Payments to a former spouse under a divorce or separation agreement. Under agreements signed before 2019 it's taxable to the person who receives it and deductible by the person who pays it. Under later agreements it's neither.
 
+**Cancellation of debt**  
+Debt a lender forgives or cancels, usually reported on Form 1099-C. It's often taxable income, though there are exceptions, such as when you were insolvent.
+
 **Capital gain or loss**  
 The profit or loss when you sell an investment or other property. Gain on property held more than a year is long-term and taxed at lower rates.
 
 **Child support**  
 Payments to support a child after a divorce or separation. Never taxable to the person who receives it and never deductible by the person who pays it.
+
+**Digital assets**  
+Cryptocurrency, stablecoins, NFTs and similar assets recorded on a blockchain. Every Form 1040 asks whether you received, sold or exchanged any. Gains and losses are reported like other property sales.
 
 **Dividends**  
 Money a company or fund pays to its shareholders. Ordinary dividends are taxed like wages; qualified dividends get lower capital gains rates.
@@ -59,8 +97,14 @@ What a bank, credit union or bond pays you for using your money. Most interest i
 **Nontaxable income**  
 Money you receive that isn't taxed, such as gifts, child support, most veterans' benefits, workers' compensation, and damages for a physical injury.
 
+**Pell grant**  
+A federal grant for undergraduate students with financial need. It's treated like a scholarship: tax-free when used for tuition and required expenses, taxable when used for living costs. A student can sometimes choose to treat part of it as taxable so that more tuition counts toward the American opportunity credit.
+
 **Qualified dividends**  
 Dividends that meet holding-period and other rules and are taxed at the lower long-term capital gains rates.
+
+**Scholarship**  
+Money for school that you don't pay back. It's tax-free when used for tuition, fees, books and required supplies by a degree candidate. Amounts used for room, board or travel are taxable income.
 
 **Self-employment income**  
 Profit from work you do for yourself rather than as an employee, usually reported on Schedule C. It's subject to self-employment tax as well as income tax.
@@ -105,6 +149,9 @@ An adjustment for K–12 teachers and aides who work at least 900 hours a school
 
 **Fair market value (FMV)**  
 What a willing buyer would pay a willing seller. Donated property is usually deducted at its fair market value, not at what you paid.
+
+**Health savings account (HSA)**  
+A savings account for medical costs, paired with a high-deductible health plan. Contributions are deductible or pre-tax, and money used for medical expenses comes out tax-free. Reported on Form 8889.
 
 **Itemized deductions**  
 Specific expenses listed on Schedule A instead of taking the standard deduction: medical costs above a percentage of AGI, state and local taxes, mortgage interest, charitable gifts and a few others. Worth it only when the total is bigger than the standard deduction.
@@ -167,6 +214,9 @@ Income tax an employer or payer takes out of your pay and sends to the IRS for y
 **Additional child tax credit (ACTC)**  
 The refundable part of the child tax credit, for families whose tax is too low to use the whole credit. Based on earned income.
 
+**Adoption credit**  
+A credit for the costs of adopting a child, such as adoption fees, court costs and travel. Starting in 2025, part of it is refundable. Figured on Form 8839.
+
 **Advance premium tax credit (APTC)**  
 Premium tax credit paid directly to your insurer during the year to lower your monthly premium. If you received too much, you may have to pay some back.
 
@@ -178,6 +228,9 @@ A nonrefundable credit for part of what you pay for care of a child under 13 (or
 
 **Child tax credit (CTC)**  
 A credit for each qualifying child under 17 with a valid Social Security number. Figured on Schedule 8812.
+
+**Clean vehicle credit**  
+A credit for buying a new or used electric or fuel cell vehicle. It ended for vehicles acquired after September 30, 2025. Figured on Form 8936.
 
 **Credit**  
 An amount subtracted directly from your tax, dollar for dollar. A $1,000 credit saves $1,000, which makes credits worth more than deductions of the same size.
@@ -193,6 +246,9 @@ A refundable credit for workers with low to moderate income. It's larger with qu
 
 **Energy efficient home improvement credit**  
 A credit for insulation, efficient windows and doors, heat pumps and energy audits. Ended for property placed in service after 2025.
+
+**Excess Social Security tax withheld**  
+When two or more employers together withhold more Social Security tax than the yearly maximum, the extra is refunded as a credit on your return.
 
 **Foreign tax credit**  
 A credit for income tax paid to another country, so the same income isn't fully taxed twice. Usually figured on Form 1116.
@@ -343,6 +399,9 @@ Reports student loan interest you paid.
 **Form 1098-T**  
 Tuition statement from a college, used for education credits.
 
+**Form 1098-VLI**  
+Vehicle Loan Interest Statement. A lender's report of interest you paid on a loan for a qualifying new vehicle, used for the car loan interest deduction on Schedule 1-A.
+
 **Form 1099-DIV**  
 Reports dividends and capital gain distributions from stocks and mutual funds.
 
@@ -375,6 +434,9 @@ The custodial parent's release of a child's dependency claim to the noncustodial
 
 **Form 8606**  
 Nondeductible IRAs: tracks after-tax money in traditional IRAs and reports Roth conversions.
+
+**Form 8862**  
+Information To Claim Certain Credits After Disallowance. Needed to claim the earned income credit, child tax credit, American opportunity credit or head of household status again after the IRS disallowed it on an earlier return.
 
 **Form 8863**  
 Education Credits: figures the American opportunity and lifetime learning credits.

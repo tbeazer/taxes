@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Form 1040 Flow Map 2024</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a radial-ish mind map — Form 1040 hub in the centre column, input branches on the left,
+   computation branches on the right, compliance along the bottom; a detail drawer opens beside it. */
+:root{
+  --paper:#f3f5f4;      /* form paper, faint green-grey like IRS stock */
+  --sheet:#ffffff;
+  --ink:#16201d;        /* print black with a green bias */
+  --ink-2:#4b5853;
+  --rule:#cfd8d4;
+  --accent:#0c6b58;     /* IRS-form green */
+  --accent-soft:#e1efeb;
+  --hl:#ffe45c;         /* highlighter */
+  --hl-ink:#16201d;
+  --dd:#7b3fa6;         /* due-diligence violet */
+  --dd-soft:#f1e8f7;
+  --shadow:0 1px 2px rgba(22,32,29,.06),0 6px 18px rgba(22,32,29,.06);
+  --f-display:"Archivo Narrow","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#111816;--sheet:#18211e;--ink:#e6eeea;--ink-2:#a7b6b0;--rule:#2c3a35;
+  --accent:#5cc6ad;--accent-soft:#17312a;--hl:#d9b72a;--hl-ink:#111816;--dd:#c49be6;--dd-soft:#2a2033;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#111816;--sheet:#18211e;--ink:#e6eeea;--ink-2:#a7b6b0;--rule:#2c3a35;
+  --accent:#5cc6ad;--accent-soft:#17312a;--hl:#d9b72a;--hl-ink:#111816;--dd:#c49be6;--dd-soft:#2a2033;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1320px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px}
+.tag{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(28px,4vw,40px);line-height:1.05;margin:4px 0 6px;text-wrap:balance}
+.lede{margin:0;color:var(--ink-2);max-width:68ch}
+.hl{background:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 88%,transparent 88%);color:var(--hl-ink);padding:0 .2em;border-radius:2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.search{flex:1 1 220px;min-width:0;display:flex;align-items:center;gap:8px;background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:8px 12px}
+.search input{border:0;background:transparent;color:var(--ink);font:inherit;width:100%;outline:none}
+.toggle{display:inline-flex;align-items:center;gap:8px;background:var(--sheet);border:1px solid var(--rule);border-radius:999px;padding:7px 14px;font:500 13px var(--f-body);color:var(--ink);cursor:pointer}
+.toggle[aria-pressed="true"]{border-color:var(--ink);}
+.toggle .sw{width:10px;height:10px;border-radius:50%;background:var(--rule)}
+.toggle.t-hl[aria-pressed="true"] .sw{background:var(--hl);box-shadow:0 0 0 2px var(--ink) inset}
+.toggle.t-dd[aria-pressed="true"] .sw{background:var(--dd)}
+
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--ink-2)}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+
+/* ---------- the map ---------- */
+.stage{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+.map{position:relative;display:grid;gap:18px;grid-template-columns:minmax(0,1fr);grid-template-areas:"hub" "income" "sch1" "ded" "tax" "cred" "pay" "supp"}
+.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.wires path{fill:none;stroke:var(--accent);stroke-width:1.5;opacity:.55}
+@media (min-width:1080px){
+  .map{grid-template-columns:minmax(0,1fr) minmax(220px,260px) minmax(0,1fr);column-gap:56px;
+    grid-template-areas:"income hub tax" "sch1 hub cred" "ded hub pay" "supp supp supp"}
+}
+.hub{grid-area:hub;align-self:center;position:relative;z-index:1;background:var(--ink);color:var(--paper);border-radius:14px;padding:18px 18px 16px;box-shadow:var(--shadow)}
+.hub .num{font-family:var(--f-display);font-weight:700;font-size:44px;line-height:1}
+.hub .sub{font-size:13px;opacity:.8;margin-top:2px}
+.hub ol{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:13px}
+.hub li{display:flex;justify-content:space-between;gap:10px;border-top:1px solid rgba(127,127,127,.35);padding-top:4px}
+.hub li b{font-family:var(--f-mono);font-weight:500;font-size:12px;white-space:nowrap}
+.hub a{color:inherit}
+
+.branch{position:relative;z-index:1;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:14px;box-shadow:var(--shadow);min-width:0}
+.branch h2{margin:0;font-family:var(--f-display);font-weight:700;font-size:20px;line-height:1.15;text-wrap:balance}
+.branch .lines{font-family:var(--f-mono);font-size:12px;color:var(--accent);margin-top:2px}
+.branch p.bd{margin:6px 0 10px;font-size:13px;color:var(--ink-2)}
+.leaves{display:flex;flex-wrap:wrap;gap:8px}
+.leaf{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;max-width:100%;border:1px solid var(--rule);border-radius:8px;padding:6px 10px;background:var(--paper);font-size:13.5px;line-height:1.25;color:var(--ink)}
+.leaf:hover{border-color:var(--accent)}
+.leaf:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.leaf .fn{font-family:var(--f-display);font-weight:700;font-size:15px}
+.leaf .ln{font-family:var(--f-mono);font-size:11px;color:var(--ink-2)}
+.leaf .marks{display:inline-flex;gap:4px}
+.leaf[aria-current="true"]{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.leaf.dim{opacity:.28}
+.show-hl .leaf.has-limit{background:linear-gradient(var(--hl),var(--hl)) left bottom/100% 4px no-repeat,var(--paper)}
+.show-dd .leaf.is-dd{border-color:var(--dd);box-shadow:inset 3px 0 0 var(--dd)}
+.also{margin-top:10px;font-size:12.5px;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.also button{all:unset;cursor:pointer;font-family:var(--f-mono);font-size:11.5px;border:1px dashed var(--rule);border-radius:6px;padding:2px 7px;color:var(--ink)}
+.also button:hover{border-color:var(--accent)}
+.b-supp{grid-area:supp}
+
+/* ---------- drawer ---------- */
+.drawer{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;box-shadow:var(--shadow);padding:18px;min-width:0}
+@media (min-width:1080px){
+  .stage.open{grid-template-columns:minmax(0,1fr) 400px}
+  .drawer{position:sticky;top:max(16px,env(safe-area-inset-top,0px));max-height:calc(100vh - 32px);overflow:auto;align-self:start}
+}
+.drawer .empty{color:var(--ink-2);font-size:14px}
+.drawer h3{font-family:var(--f-display);font-size:26px;line-height:1.1;margin:2px 0 4px}
+.drawer .full{color:var(--ink-2);font-size:14px;margin:0 0 12px}
+.close{all:unset;cursor:pointer;float:right;font:500 13px var(--f-body);color:var(--ink-2);border:1px solid var(--rule);border-radius:6px;padding:3px 9px}
+.flows{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.flows span{font-family:var(--f-mono);font-size:12px;background:var(--accent-soft);color:var(--ink);border-radius:5px;padding:2px 7px}
+.sec{border-top:1px solid var(--rule);padding-top:12px;margin-top:12px}
+.sec h4{margin:0 0 8px;font:600 12px var(--f-body);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2)}
+.sec ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.limits li{list-style:none;margin-left:-18px}
+.limits .hl{font-weight:600}
+.ddbox{background:var(--dd-soft);border-radius:10px;padding:12px;margin-top:4px}
+.ddbadge{display:inline-block;font:600 11px var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--sheet);background:var(--dd);border-radius:4px;padding:2px 6px;margin-bottom:8px}
+.ddbox .note{font-size:12.5px;color:var(--ink-2);margin:8px 0 0}
+.links{display:flex;flex-direction:column;gap:6px;font-size:14px}
+.links a{display:inline-flex;gap:6px;align-items:baseline}
+.links a::after{content:"↗";font-size:11px}
+
+/* ---------- limits table ---------- */
+.limits-sheet{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:16px;box-shadow:var(--shadow)}
+.limits-sheet h2{font-family:var(--f-display);font-size:24px;margin:0 0 4px}
+.limits-sheet p{margin:0 0 12px;color:var(--ink-2);font-size:14px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font:600 12px var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+td.form button{all:unset;cursor:pointer;font-family:var(--f-display);font-weight:700;color:var(--accent)}
+td.amt{font-variant-numeric:tabular-nums;white-space:nowrap}
+footer{font-size:12.5px;color:var(--ink-2);max-width:90ch}
+.srcs{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+@media (prefers-reduced-motion:no-preference){.leaf{transition:border-color .15s,opacity .15s}}
+
+.yearbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px}
+.yearbar span{color:var(--ink-2);margin-right:2px}
+.yearbar a,.yearbar b{border:1px solid var(--rule);border-radius:999px;padding:3px 11px;text-decoration:none;color:var(--ink);background:var(--sheet);font-weight:500}
+.yearbar b{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.draft{border:1px solid var(--dd);background:var(--dd-soft);border-radius:10px;padding:10px 14px;font-size:14px;max-width:90ch}
+.news ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <nav class="crumbs" style="font-size:13px;display:flex;flex-wrap:wrap;gap:6px 14px"><a href="../../index.html">Taxes home</a><a href="../../resources/index.html">Free help &amp; resources</a><a href="../../questions/index.html">Questions to ask</a><a href="../../definitions/index.html">Definitions</a></nav>
+  <nav class="yearbar" aria-label="Tax year"><span>Tax year</span><a href="../2026/index.html">2026 (draft)</a><a href="../2025/index.html">2025</a><b aria-current="page">2024</b></nav>
+  <header class="top">
+    <div>
+      <div class="tag">Tax year 2024 · study aid</div>
+      <h1>Form 1040 Flow Map</h1>
+      <p class="lede">Common individual tax forms and the Form 1040 line each one lands on. Tap a form to see what it's for, its <span class="hl">2024 limits</span>, the due diligence questions to ask, and links to the official IRS form and instructions.</p>
+    </div>
+  </header>
+
+  <section class="limits-sheet news"><h2>How 2024 differs from 2025</h2><ul><li>No Schedule 1-A: the tips, overtime, car loan interest and senior deductions start in 2025.</li><li>SALT deduction capped at $10,000 ($5,000 married filing separately).</li><li>Child tax credit is $2,000 per child, with up to $1,700 refundable.</li><li>Clean vehicle buyers could transfer the credit to the dealer at the time of sale.</li><li>Residential clean energy and home improvement credits available.</li><li>The standard deduction is on line 12 and the QBI deduction on line 13.</li></ul></section>
+  <div class="controls">
+    <label class="search" for="q"><span aria-hidden="true">⌕</span><input id="q" type="search" placeholder="Search forms, lines or limits (e.g. 8812, 7.5%, line 27)"></label>
+    <button class="toggle t-hl" id="tHl" aria-pressed="true"><span class="sw"></span>Highlight limits</button>
+    <button class="toggle t-dd" id="tDd" aria-pressed="true"><span class="sw"></span>Mark Form 8867 items</button>
+  </div>
+  <div class="legend">
+    <span><i class="dot" style="background:var(--hl)"></i>Has a 2024 dollar limit, percentage or threshold</span>
+    <span><i class="dot" style="background:var(--dd)"></i>Covered by the paid preparer due diligence rules (Form 8867)</span>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="map show-hl show-dd" id="map">
+      <svg class="wires" id="wires" aria-hidden="true"></svg>
+      <div class="hub" id="hub">
+        <div class="tag" style="color:inherit;opacity:.75">U.S. Individual Income Tax Return</div>
+        <div class="num">1040</div>
+        <div class="sub">How the return is built, top to bottom</div>
+        <ol><li><span>Income</span><b>1a–9</b></li><li><span>Adjustments → AGI</span><b>10–11</b></li><li><span>Deductions</span><b>12–14</b></li><li><span>Taxable income → tax</span><b>15–18</b></li><li><span>Nonrefundable credits</span><b>19–22</b></li><li><span>Other taxes → total tax</span><b>23–24</b></li><li><span>Payments &amp; refundable credits</span><b>25–33</b></li><li><span>Refund or amount owed</span><b>34–38</b></li></ol>
+        <div style="margin-top:12px;font-size:13px;line-height:1.7"><a href="https://www.irs.gov/pub/irs-prior/f1040--2024.pdf" target="_blank" rel="noopener">Form 1040 (PDF)</a> · <a href="https://www.irs.gov/pub/irs-prior/i1040gi--2024.pdf" target="_blank" rel="noopener">Instructions</a><br><a href="https://www.irs.gov/pub/irs-prior/p17--2024.pdf" target="_blank" rel="noopener">Pub 17</a> · <a href="https://www.irs.gov/pub/irs-pdf/p4012.pdf" target="_blank" rel="noopener">Pub 4012</a> · <a href="https://www.irs.gov/pub/irs-pdf/f13614c.pdf" target="_blank" rel="noopener">Form 13614-C</a></div>
+      </div>
+    </div>
+    <aside class="drawer" id="drawer" hidden aria-live="polite"></aside>
+  </div>
+
+  <section class="limits-sheet" id="limits">
+    <h2>All 2024 limits on one sheet</h2>
+    <p>Every highlighted boundary from the map. Select a form name to open its card.</p>
+    <div class="tbl"><table><thead><tr><th>Form</th><th>Limit</th><th>Amount</th></tr></thead><tbody id="ltbody"></tbody></table></div>
+  </section>
+
+  <section class="limits-sheet" id="sources">
+    <h2>Sources</h2>
+    <p>Every figure comes from public U.S. government sources. IRS forms, instructions and publications are public domain.</p>
+    <ul class="srcs"><li><a href="https://www.irs.gov/irb/2023-48_IRB" target="_blank" rel="noopener">Rev. Proc. 2023-34 (Internal Revenue Bulletin 2023-48)</a>: 2024 inflation adjustments: standard deduction, EIC table, kiddie tax, QBI, student loan interest, adoption credit, qualifying relative income, educator expenses, preparer penalties</li><li><a href="https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2024" target="_blank" rel="noopener">IR-2023-208</a>: 2024 inflation adjustments summary</li><li><a href="https://www.irs.gov/newsroom/401k-limit-increases-to-23000-for-2024-ira-limit-rises-to-7000" target="_blank" rel="noopener">IR-2023-203</a>: 2024 401(k), IRA and Roth limits</li><li><a href="https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-savings-contributions-savers-credit" target="_blank" rel="noopener">IRS: Saver&#x27;s Credit</a>: 2024 Saver&#x27;s Credit income tiers</li><li><a href="https://www.irs.gov/pub/irs-prior/f1040--2024.pdf" target="_blank" rel="noopener">2024 Form 1040</a>: Line numbers</li><li><a href="https://www.ssa.gov/oact/cola/cbb.html" target="_blank" rel="noopener">Social Security Administration</a>: 2024 contribution and benefit base ($168,600)</li><li><a href="https://www.irs.gov/tax-professionals/eitc-central/completing-form-8867" target="_blank" rel="noopener">IRS: Completing Form 8867</a> and <a href="https://www.irs.gov/tax-professionals/eitc-central/due-diligence-law-regulations-and-requirements" target="_blank" rel="noopener">due diligence requirements</a></li><li>IRS Form 1040 instructions and the form-specific instructions and publications linked on each card (Pubs 501, 503, 575, 590-A, 596, 915, 936, 970)</li><li><a href="https://www.irs.gov/pub/irs-pdf/f13614c.pdf" target="_blank" rel="noopener">Form 13614-C</a> and <a href="https://www.irs.gov/pub/irs-pdf/p4012.pdf" target="_blank" rel="noopener">Publication 4012</a>: the IRS VITA/TCE intake sheet and volunteer resource guide (current editions)</li><li><a href="https://www.irs.gov/pub/irs-utl/Interaction_of_Scholarships_and_Tax_Credits.pdf" target="_blank" rel="noopener">IRS: Interaction of scholarships and tax credits</a>: including a Pell grant in income to claim the AOTC</li></ul>
+  </section>
+
+  <footer>Tax year 2024 (returns filed in 2025). Form links open the 2024 versions in the IRS prior-year archive; a few forms the IRS revises only occasionally link to the current version. Line numbers follow the 2024 Form 1040 and schedules. The interview questions on each card are an original study aid written for this map, not official IRS text; the official due diligence questions are on Form 8867 and in its instructions. This map is an independent educational project. It is not tax advice and is not affiliated with or endorsed by the IRS or any tax preparation company. Confirm figures against the current IRS instructions before preparing a return.</footer>
+</div>
+
+<script>
+/* tax year 2024: which IRS PDF each form name opens */
+const LINKS = {"f1040":"https://www.irs.gov/pub/irs-prior/f1040--2024.pdf","f1040es":"https://www.irs.gov/pub/irs-prior/f1040es--2024.pdf","f1040s":"https://www.irs.gov/pub/irs-prior/f1040s--2024.pdf","f1040s1":"https://www.irs.gov/pub/irs-prior/f1040s1--2024.pdf","f1040s2":"https://www.irs.gov/pub/irs-prior/f1040s2--2024.pdf","f1040s3":"https://www.irs.gov/pub/irs-prior/f1040s3--2024.pdf","f1040s8":"https://www.irs.gov/pub/irs-prior/f1040s8--2024.pdf","f1040sa":"https://www.irs.gov/pub/irs-prior/f1040sa--2024.pdf","f1040sb":"https://www.irs.gov/pub/irs-prior/f1040sb--2024.pdf","f1040sc":"https://www.irs.gov/pub/irs-prior/f1040sc--2024.pdf","f1040sd":"https://www.irs.gov/pub/irs-prior/f1040sd--2024.pdf","f1040se":"https://www.irs.gov/pub/irs-prior/f1040se--2024.pdf","f1040sei":"https://www.irs.gov/pub/irs-prior/f1040sei--2024.pdf","f1040sr":"https://www.irs.gov/pub/irs-prior/f1040sr--2024.pdf","f1040sse":"https://www.irs.gov/pub/irs-prior/f1040sse--2024.pdf","f1095a":"https://www.irs.gov/pub/irs-prior/f1095a--2024.pdf","f1098":"https://www.irs.gov/pub/irs-pdf/f1098.pdf","f1098e":"https://www.irs.gov/pub/irs-prior/f1098e--2024.pdf","f1098t":"https://www.irs.gov/pub/irs-prior/f1098t--2024.pdf","f1099b":"https://www.irs.gov/pub/irs-prior/f1099b--2024.pdf","f1099div":"https://www.irs.gov/pub/irs-prior/f1099div--2024.pdf","f1099g":"https://www.irs.gov/pub/irs-prior/f1099g--2024.pdf","f1099int":"https://www.irs.gov/pub/irs-prior/f1099int--2024.pdf","f1099msc":"https://www.irs.gov/pub/irs-prior/f1099msc--2024.pdf","f1099nec":"https://www.irs.gov/pub/irs-prior/f1099nec--2024.pdf","f1099r":"https://www.irs.gov/pub/irs-prior/f1099r--2024.pdf","f1116":"https://www.irs.gov/pub/irs-prior/f1116--2024.pdf","f2106":"https://www.irs.gov/pub/irs-prior/f2106--2024.pdf","f2441":"https://www.irs.gov/pub/irs-prior/f2441--2024.pdf","f5329":"https://www.irs.gov/pub/irs-prior/f5329--2024.pdf","f5498":"https://www.irs.gov/pub/irs-prior/f5498--2024.pdf","f5695":"https://www.irs.gov/pub/irs-prior/f5695--2024.pdf","f8283":"https://www.irs.gov/pub/irs-pdf/f8283.pdf","f8332":"https://www.irs.gov/pub/irs-pdf/f8332.pdf","f8606":"https://www.irs.gov/pub/irs-prior/f8606--2024.pdf","f8615":"https://www.irs.gov/pub/irs-prior/f8615--2024.pdf","f8839":"https://www.irs.gov/pub/irs-prior/f8839--2024.pdf","f8863":"https://www.irs.gov/pub/irs-prior/f8863--2024.pdf","f8867":"https://www.irs.gov/pub/irs-prior/f8867--2024.pdf","f8880":"https://www.irs.gov/pub/irs-prior/f8880--2024.pdf","f8888":"https://www.irs.gov/pub/irs-prior/f8888--2024.pdf","f8936":"https://www.irs.gov/pub/irs-prior/f8936--2024.pdf","f8949":"https://www.irs.gov/pub/irs-prior/f8949--2024.pdf","f8962":"https://www.irs.gov/pub/irs-prior/f8962--2024.pdf","f8995":"https://www.irs.gov/pub/irs-prior/f8995--2024.pdf","fw2":"https://www.irs.gov/pub/irs-prior/fw2--2024.pdf","fw2g":"https://www.irs.gov/pub/irs-pdf/fw2g.pdf","fw4":"https://www.irs.gov/pub/irs-prior/fw4--2024.pdf","i1040gi":"https://www.irs.gov/pub/irs-prior/i1040gi--2024.pdf","i1040s8":"https://www.irs.gov/pub/irs-prior/i1040s8--2024.pdf","i1040sc":"https://www.irs.gov/pub/irs-prior/i1040sc--2024.pdf","i1040sca":"https://www.irs.gov/pub/irs-prior/i1040sca--2024.pdf","i1040sr":"https://www.irs.gov/pub/irs-prior/i1040sr--2024.pdf","i5329":"https://www.irs.gov/pub/irs-prior/i5329--2024.pdf","i5695":"https://www.irs.gov/pub/irs-prior/i5695--2024.pdf","i8839":"https://www.irs.gov/pub/irs-prior/i8839--2024.pdf","i8867":"https://www.irs.gov/pub/irs-prior/i8867--2024.pdf","i8962":"https://www.irs.gov/pub/irs-prior/i8962--2024.pdf","iw2w3":"https://www.irs.gov/pub/irs-prior/iw2w3--2024.pdf","p501":"https://www.irs.gov/pub/irs-prior/p501--2024.pdf","p503":"https://www.irs.gov/pub/irs-prior/p503--2024.pdf","p575":"https://www.irs.gov/pub/irs-prior/p575--2024.pdf","p590a":"https://www.irs.gov/pub/irs-prior/p590a--2024.pdf","p596":"https://www.irs.gov/pub/irs-prior/p596--2024.pdf","p915":"https://www.irs.gov/pub/irs-prior/p915--2024.pdf","p936":"https://www.irs.gov/pub/irs-prior/p936--2024.pdf","p970":"https://www.irs.gov/pub/irs-prior/p970--2024.pdf","p17":"https://www.irs.gov/pub/irs-prior/p17--2024.pdf"};
+const IRS = n => LINKS[n] || `https://www.irs.gov/pub/irs-pdf/${n}.pdf`;
+const PRIOR = IRS;
+const DD = {
+  f8867:{t:"Form 8867 (PDF)",u:IRS("f8867")},
+  i8867:{t:"Form 8867 instructions",u:IRS("i8867")},
+  complete:{t:"IRS: Completing Form 8867",u:"https://www.irs.gov/tax-professionals/eitc-central/completing-form-8867"},
+  law:{t:"IRS: Due diligence law, regulations and requirements",u:"https://www.irs.gov/tax-professionals/eitc-central/due-diligence-law-regulations-and-requirements"},
+  errors:{t:"IRS: Most common errors and due diligence situations",u:"https://www.irs.gov/tax-professionals/eitc-central/handling-the-most-common-errors-and-due-diligence-situations"},
+  c230:{t:"Circular 230 (§10.22 diligence as to accuracy)",u:IRS("pcir230")},
+  itaCtc:{t:"IRS ITA: Does my child qualify for the CTC/ODC?",u:"https://www.irs.gov/help/ita/does-my-childdependent-qualify-for-the-child-tax-credit-or-the-credit-for-other-dependents"},
+  itaEdu:{t:"IRS ITA: Am I eligible for an education credit?",u:"https://www.irs.gov/help/ita/am-i-eligible-to-claim-an-education-credit"},
+  p501:{t:"Publication 501 (filing status, dependents)",u:IRS("p501")},
+  p596:{t:"Publication 596 (Earned Income Credit)",u:IRS("p596")}
+};
+DD.p4012={t:"Publication 4012 (VITA/TCE Volunteer Resource Guide)",u:IRS("p4012")};
+DD.f13614={t:"Form 13614-C (Intake/Interview & Quality Review Sheet)",u:IRS("f13614c")};
+const DD8867 = [DD.f8867,DD.i8867,DD.complete,DD.law,DD.errors,DD.p4012,DD.f13614];
+const DDGEN = [DD.f13614,DD.p4012,DD.c230,DD.errors];
+
+const BRANCHES = [
+ {id:"income",name:"Income documents",lines:"Lines 1a–7",bd:"Information returns the taxpayer brings in. Most go straight to page 1."},
+ {id:"sch1",name:"Schedule 1: other income & adjustments",lines:"Lines 8 and 10",bd:"Part I adds income that has no line of its own; Part II subtracts adjustments to reach AGI."},
+ {id:"ded",name:"Deductions",lines:"Lines 12e, 13a, 13b",bd:"Standard or itemized deduction, then the QBI deduction and the new Schedule 1-A deductions."},
+ {id:"tax",name:"Tax & other taxes",lines:"Lines 16, 17, 23",bd:"Regular tax from the table, plus additional taxes reported on Schedule 2."},
+ {id:"cred",name:"Nonrefundable credits",lines:"Lines 19 and 20",bd:"Credits that can reduce tax to zero but not below."},
+ {id:"pay",name:"Payments & refundable credits",lines:"Lines 25–31",bd:"Withholding, estimated payments and credits that can create a refund."},
+ {id:"supp",name:"Supporting & compliance forms",lines:"Attached or kept on file",bd:"Forms that decide who can claim what, track basis, or document the preparer's due diligence."}
+];
+
+let F = [
+/* ---------- income ---------- */
+{id:"w2",n:"W-2",full:"Wage and Tax Statement",b:"income",flows:["1a (Box 1)","25a (Box 2)"],
+ what:"Wages from an employer. Box 1 goes on line 1a and Box 2 withholding on line 25a. Box 10 dependent care benefits go to Form 2441; Box 12 code D shows 401(k) deferrals; Box 13 shows retirement plan coverage.",
+ lim:[["Social Security wage base (Box 3)","$176,100"],["Dependent care benefits excluded (Box 10)","$5,000 ($2,500 MFS)"],["401(k) deferral limit (Box 12 D)","$23,500 (+$7,500 age 50+, +$11,250 ages 60–63)"]],
+ qs:["Is this every W-2 for the year, including part-year and second jobs?","Is Box 13 'Retirement plan' checked? (It can limit the IRA deduction.)","Are there dependent care benefits in Box 10 that need Form 2441?","Does the employer name and EIN look legitimate, and do the wages fit the hours worked?"],
+ dd:"gen",links:[{t:"Form W-2 (PDF)",u:PRIOR("fw2")},{t:"W-2 instructions",u:PRIOR("iw2w3")}]},
+{id:"1099int",n:"1099-INT",full:"Interest Income",b:"income",flows:["2a (Box 8)","2b (Boxes 1, 3)","Schedule B"],
+ what:"Bank, CD and bond interest. Taxable interest goes on line 2b and tax-exempt interest on line 2a. Credit union 'dividends' on deposits are interest. Box 2 early withdrawal penalty goes to Schedule 1 as an adjustment.",
+ lim:[["Schedule B required when interest or dividends exceed","$1,500"],["Payer issues 1099-INT at","$10 or more"],["U.S. Savings Bond / Treasury interest","Taxable federally, exempt from state tax"]],
+ qs:["Do you have any other bank, brokerage or credit union accounts?","Do you have any foreign accounts? (Schedule B, Part III)","Was any interest from U.S. Savings Bonds or Treasury bills?","Did you pay a penalty for withdrawing a CD early?"],
+ dd:"gen",links:[{t:"Form 1099-INT (PDF)",u:IRS("f1099int")},{t:"Schedule B (PDF)",u:IRS("f1040sb")}]},
+{id:"1099div",n:"1099-DIV",full:"Dividends and Distributions",b:"income",flows:["3a (Box 1b)","3b (Box 1a)","7a (Box 2a)","Schedule B"],
+ what:"Stock and mutual fund dividends. Ordinary dividends go on line 3b, the qualified part on line 3a, and capital gain distributions on line 7a or Schedule D.",
+ lim:[["Schedule B required when dividends exceed","$1,500"]],
+ qs:["Do you own stock or funds in any other account?","Were any dividends reinvested? (They are still taxable.)","Was foreign tax paid (Box 7)? (Possible foreign tax credit.)"],
+ dd:"gen",links:[{t:"Form 1099-DIV (PDF)",u:IRS("f1099div")},{t:"Schedule B (PDF)",u:IRS("f1040sb")}]},
+{id:"1099r",n:"1099-R",full:"Distributions From Pensions, Annuities, Retirement Plans, IRAs",b:"income",flows:["4a / 4b (IRAs)","5a / 5b (pensions)","25b (Box 4)"],
+ what:"Retirement distributions. Box 7 codes tell you the type: code 7 is normal, code 1 is early with no known exception, code 3 is disability, code 4 is death. When Box 2b 'taxable amount not determined' is checked, figure the taxable part with the Simplified Method or Form 8606.",
+ lim:[["Early distribution age (10% additional tax before)","59½ (55 for employer plans after separation)"],["Simplified Method payments by age at start","55 or under 360 · 56–60 310 · 61–65 260 · 66–70 210 · 71+ 160"],["Disability pension before minimum retirement age","Reported as wages, line 1h"]],
+ qs:["How old were you when the payments started, and what was your cost in the plan (Box 9b)?","Was the money rolled over within 60 days?","Was it from an IRA or an employer plan? (Several exceptions apply only to IRAs.)","What was the money used for? (Education, first home, medical, health insurance while unemployed?)","Have you ever made nondeductible IRA contributions? (Form 8606 basis)"],
+ dd:"gen",links:[{t:"Form 1099-R (PDF)",u:PRIOR("f1099r")},{t:"Publication 575 (Pension and Annuity Income)",u:IRS("p575")}]},
+{id:"ssa",n:"SSA-1099",full:"Social Security Benefit Statement",b:"income",flows:["6a (Box 5)","6b taxable part"],
+ what:"Social Security benefits. Line 6a is the total; line 6b is the taxable part from the worksheet in the instructions.",
+ lim:[["Maximum taxable share of benefits","85%"],["Base amount (up to 50% taxable)","$25,000 single · $32,000 MFJ"],["Second tier (up to 85% taxable)","$34,000 single · $44,000 MFJ"],["MFS and lived with spouse","Base amount $0"]],
+ qs:["Did you receive a lump-sum payment for earlier years?","Did you and your spouse live together at any time during the year (if filing separately)?","Was any Medicare premium withheld? (Possible medical deduction.)"],
+ dd:"gen",links:[{t:"Publication 915 (Social Security benefits)",u:IRS("p915")}]},
+{id:"sd",n:"Schedule D / 8949",full:"Capital Gains and Losses (with Form 1099-B)",b:"income",flows:["7a"],
+ what:"Sales of stock, funds and other capital assets reported on Form 1099-B. Details go on Form 8949, totals on Schedule D, and the net gain or loss on line 7a.",
+ lim:[["Capital loss deduction per year","$3,000 ($1,500 MFS)"],["Long-term holding period","More than 1 year"]],
+ qs:["Do you have the cost basis for every sale, including reinvested dividends?","Do you have a capital loss carryover from last year?","Did you sell your home or any crypto or collectibles?"],
+ dd:"gen",links:[{t:"Schedule D (PDF)",u:IRS("f1040sd")},{t:"Form 8949 (PDF)",u:IRS("f8949")},{t:"Form 1099-B (PDF)",u:PRIOR("f1099b")}]},
+{id:"w2g",n:"W-2G",full:"Certain Gambling Winnings",b:"income",flows:["Schedule 1, line 8b","25c (withholding)"],
+ what:"Gambling winnings go on Schedule 1 as other income. Losses are an itemized deduction on Schedule A, limited to winnings.",
+ lim:[["Gambling losses deductible up to","Total winnings (itemizers only)"],["Starting in 2026","Losses capped at 90%"]],
+ qs:["Do you have winnings not reported on a W-2G?","Do you have records of losses: tickets, slips, statements?","Will you itemize?"],
+ dd:"gen",links:[{t:"Form W-2G (PDF)",u:IRS("fw2g")}]},
+{id:"1099g",n:"1099-G",full:"Certain Government Payments",b:"income",flows:["Schedule 1, line 7 (unemployment)","Schedule 1, line 1 (state refund)"],
+ what:"Unemployment compensation is fully taxable. A state or local tax refund is taxable only if it was deducted on a prior-year Schedule A.",
+ lim:[["Unemployment compensation","Fully taxable, unearned income"]],
+ qs:["Did you itemize last year? (Decides whether the state refund is taxable.)","Did you repay any unemployment?","Was federal tax withheld (Box 4)?"],
+ dd:"gen",links:[{t:"Form 1099-G (PDF)",u:IRS("f1099g")}]},
+{id:"1099nec",n:"1099-NEC / MISC",full:"Nonemployee Compensation / Miscellaneous Information",b:"income",flows:["Schedule C → Sch 1 line 3","Schedule E (rents)","Sch 1 line 8 (other)"],
+ what:"Self-employment pay (1099-NEC) goes on Schedule C. Rents from 1099-MISC go on Schedule E; prizes and other income go on Schedule 1.",
+ lim:[["Self-employment tax applies at net earnings of","$400"]],
+ qs:["Is this a business or a hobby? Do you have income not reported on a 1099?","What expenses did you have, and do you have records?","Did you receive a 1099-K from a payment app?"],
+ dd:"gen",links:[{t:"Form 1099-NEC (PDF)",u:PRIOR("f1099nec")},{t:"Form 1099-MISC (PDF)",u:PRIOR("f1099msc")}]},
+{id:"1095a",n:"1095-A",full:"Health Insurance Marketplace Statement",b:"income",flows:["Form 8962"],
+ what:"Not income, but anyone who receives one must file Form 8962 to reconcile the advance premium tax credit.",
+ lim:[["Form 8962 required if","Advance PTC was paid for anyone in the tax family"]],
+ qs:["Did anyone else in the household have Marketplace coverage?","Did your income or family size change during the year?","Do you have every 1095-A (one per policy)?"],
+ dd:"gen",links:[{t:"Form 1095-A (PDF)",u:PRIOR("f1095a")}]},
+
+/* ---------- schedule 1 ---------- */
+{id:"s1",n:"Schedule 1",full:"Additional Income and Adjustments to Income",b:"sch1",flows:["8 (Part I, line 10)","10 (Part II, line 26)"],
+ what:"Part I: state refunds, alimony received (pre-2019), business income, rentals, unemployment, gambling and other income. Part II: educator expenses, reservist and performing-artist expenses, HSA, half of SE tax, IRA, student loan interest and more.",
+ lim:[["Alimony is income / deductible only if the decree is dated","Before January 1, 2019"],["Educator expenses","$300 each ($600 MFJ if both educators)"]],
+ qs:["Any income not on a W-2 or 1099?","Were you a K–12 educator, a reservist, or self-employed?","Did you pay student loan interest or make IRA or HSA contributions?"],
+ dd:"gen",links:[{t:"Schedule 1 (PDF)",u:IRS("f1040s1")}]},
+{id:"sc",n:"Schedule C",full:"Profit or Loss From Business",b:"sch1",flows:["Sch 1 line 3 → line 8","Schedule SE","Form 8995"],
+ what:"Sole proprietor income and expenses. Net profit is income on Schedule 1 and the base for self-employment tax and the QBI deduction. Net self-employment earnings count as earned income for the EIC.",
+ lim:[["Self-employment tax threshold","$400 net earnings"]],
+ qs:["Do you have records (books, bank statements, receipts) that support the income and expenses?","Is the income amount reasonable for the work, especially when it maximizes the EIC?","Do you have any business use of your home or vehicle?"],
+ dd:"gen",links:[{t:"Schedule C (PDF)",u:PRIOR("f1040sc")},{t:"Schedule C instructions",u:PRIOR("i1040sc")}]},
+{id:"sse",n:"Schedule SE",full:"Self-Employment Tax",b:"sch1",flows:["Sch 2 line 4 → line 23","Sch 1 line 15 (half)"],
+ what:"Figures Social Security and Medicare tax on self-employment earnings. Half of it is deductible as an adjustment.",
+ lim:[["SE tax rate","15.3% on 92.35% of net earnings"],["Social Security part stops at","$176,100 combined wages and SE earnings"],["Filing threshold","$400 net earnings"]],
+ qs:["Do you also have W-2 wages? (They share the Social Security wage base.)","Are you a minister or church employee?"],
+ dd:"gen",links:[{t:"Schedule SE (PDF)",u:IRS("f1040sse")}]},
+{id:"se",n:"Schedule E",full:"Supplemental Income and Loss",b:"sch1",flows:["Sch 1 line 5 → line 8"],
+ what:"Rental real estate, royalties, partnerships, S corporations, estates and trusts.",
+ lim:[["Rental loss allowance (active participation)","$25,000, phased out between $100,000 and $150,000 MAGI"]],
+ qs:["How many days was the property rented and used personally?","Do you have depreciation records from prior years?"],
+ dd:"gen",links:[{t:"Schedule E (PDF)",u:IRS("f1040se")}]},
+{id:"1098e",n:"1098-E",full:"Student Loan Interest Statement",b:"sch1",flows:["Sch 1 line 21 → line 10"],
+ what:"Interest paid on qualified student loans is an adjustment to income.",
+ lim:[["Maximum deduction","$2,500"],["MAGI phaseout, single / HOH","$85,000–$100,000"],["MAGI phaseout, MFJ","$170,000–$200,000"],["Married filing separately","Not allowed"]],
+ qs:["Are you legally obligated on the loan?","Can anyone claim you as a dependent? (If so, no deduction.)","Is your filing status MFS?"],
+ dd:"gen",links:[{t:"Form 1098-E (PDF)",u:PRIOR("f1098e")},{t:"Publication 970 (Tax Benefits for Education)",u:IRS("p970")}]},
+{id:"2106",n:"Form 2106",full:"Employee Business Expenses",b:"sch1",flows:["Sch 1 line 12 → line 10"],
+ what:"Only four groups can still deduct unreimbursed employee expenses: Armed Forces reservists, qualified performing artists, fee-basis state or local officials, and employees with impairment-related work expenses (Schedule A).",
+ lim:[["Reservist travel must be more than","100 miles from home"]],
+ qs:["Which qualifying group are you in?","Were any expenses reimbursed?","Do you have mileage and travel records?"],
+ dd:"gen",links:[{t:"Form 2106 (PDF)",u:IRS("f2106")}]},
+{id:"ira",n:"IRA deduction",full:"Traditional IRA contribution (Form 5498 / worksheet)",b:"sch1",flows:["Sch 1 line 20 → line 10"],
+ what:"Deductible traditional IRA contributions. The deduction phases out when the taxpayer or spouse is covered by a workplace retirement plan. Contributions are limited to taxable compensation; a spousal IRA can use the working spouse's pay.",
+ lim:[["Contribution limit","$7,000 ($8,000 age 50+), not more than compensation"],["Phaseout, covered by plan, single / HOH","$79,000–$89,000 MAGI"],["Phaseout, covered by plan, MFJ","$126,000–$146,000 MAGI"],["Phaseout, not covered but spouse is","$236,000–$246,000 MAGI"],["Phaseout, married filing separately (covered)","$0–$10,000 MAGI"],["Roth IRA phaseout","$150,000–$165,000 single · $236,000–$246,000 MFJ"],["Contribution deadline","Return due date (no extensions)"]],
+ qs:["Is either spouse an active participant in a workplace plan (W-2 Box 13)?","Do you have taxable compensation? (Post-2018 alimony, interest and pensions don't count.)","Was any part nondeductible? (File Form 8606.)"],
+ dd:"gen",links:[{t:"Form 5498 (PDF)",u:PRIOR("f5498")},{t:"Publication 590-A (IRA contributions)",u:IRS("p590a")}]},
+
+/* ---------- deductions ---------- */
+{id:"std",n:"Standard deduction",full:"Line 12e (worksheet in the 1040 instructions)",b:"ded",flows:["12e"],
+ what:"Taken unless itemized deductions on Schedule A are larger. Age 65+ and blindness add to it.",
+ lim:[["Single / MFS","$15,750"],["Married filing jointly / QSS","$31,500"],["Head of household","$23,625"],["Additional, age 65+ or blind (single / HOH)","$2,000 each"],["Additional, age 65+ or blind (married)","$1,600 each"],["Dependent's standard deduction","Greater of $1,350 or earned income + $450"]],
+ qs:["Were you or your spouse born before January 2, 1961, or blind?","Can anyone claim you as a dependent?","If married filing separately, does your spouse itemize? (Then you must too.)"],
+ dd:"gen",links:[{t:"Form 1040 instructions",u:IRS("i1040gi")},{t:"Publication 501",u:IRS("p501")}]},
+{id:"sa",n:"Schedule A",full:"Itemized Deductions",b:"ded",flows:["12e"],
+ what:"Medical and dental expenses, taxes paid, home mortgage interest, gifts to charity, casualty losses, and other itemized deductions including gambling losses.",
+ lim:[["Medical expenses deductible above","7.5% of AGI"],["State and local tax (SALT) cap","$40,000 ($20,000 MFS)"],["SALT cap reduced when MAGI exceeds","$500,000 ($250,000 MFS), not below $10,000"],["Mortgage debt limit (after 12/15/2017)","$750,000 ($375,000 MFS)"],["Mortgage debt limit (on or before 12/15/2017)","$1,000,000 ($500,000 MFS)"],["Gambling losses","Up to winnings"],["Cash gifts to public charities","Up to 60% of AGI"],["Noncash gifts need Form 8283 when over","$500"]],
+ qs:["Were medical costs reimbursed by insurance or paid with pre-tax money?","Do you have written acknowledgments for gifts of $250 or more?","Did you receive anything in return for a donation?","Were the taxes actually paid during the year (not just billed)?"],
+ dd:"gen",links:[{t:"Schedule A (PDF)",u:IRS("f1040sa")},{t:"Schedule A instructions",u:IRS("i1040sca")},{t:"Form 8283 (PDF)",u:IRS("f8283")}]},
+{id:"1098",n:"1098",full:"Mortgage Interest Statement",b:"ded",flows:["Schedule A line 8a"],
+ what:"Mortgage interest and points paid on a main or second home.",
+ lim:[["Acquisition debt limit","$750,000 ($375,000 MFS)"],["Points on a refinance","Deducted over the life of the loan"],["Refinance with the same lender","Old unamortized points carry into the new loan"]],
+ qs:["When was the loan taken out, and what is the balance?","Was any of the loan used for something other than buying or improving the home?","Who actually paid the interest (separate property state, MFS)?"],
+ dd:"gen",links:[{t:"Form 1098 (PDF)",u:IRS("f1098")},{t:"Publication 936 (Home Mortgage Interest)",u:IRS("p936")}]},
+{id:"s1a",n:"Schedule 1-A",full:"Additional Deductions (new for 2025)",b:"ded",flows:["13b"],
+ what:"New deductions available whether or not the taxpayer itemizes: qualified tips, qualified overtime, car loan interest on a new U.S.-assembled vehicle, and the senior deduction.",
+ lim:[["Qualified tips","Up to $25,000"],["Qualified overtime premium","Up to $12,500 ($25,000 MFJ)"],["Tips / overtime phaseout starts","$150,000 MAGI ($300,000 MFJ)"],["Car loan interest","Up to $10,000; phaseout starts $100,000 ($200,000 MFJ)"],["Senior deduction (age 65+)","$6,000 per person; phaseout starts $75,000 ($150,000 MFJ)"]],
+ qs:["Are the tips from an occupation that customarily receives tips, and reported to the employer?","Is the overtime the premium part required by the FLSA?","Was the vehicle new, for personal use, and assembled in the U.S.? Did the lender send Form 1098-VLI?","Do you have a valid SSN? (Required for these deductions.)"],
+ dd:"gen",links:[{t:"Schedule 1-A (PDF)",u:IRS("f1040s1a")},{t:"Form 1040 instructions (Schedule 1-A)",u:IRS("i1040gi")},{t:"Form 1098-VLI, Vehicle Loan Interest Statement",u:IRS("f1098vli")}]},
+{id:"8995",n:"Form 8995",full:"Qualified Business Income Deduction",b:"ded",flows:["13a"],
+ what:"Up to 20% of qualified business income from a sole proprietorship, rental or pass-through entity.",
+ lim:[["Deduction rate","20% of qualified business income"],["Simplified form usable below taxable income of","$197,300 ($394,600 MFJ)"]],
+ qs:["Is the activity a trade or business?","Is it a specified service business (law, health, consulting)?"],
+ dd:"gen",links:[{t:"Form 8995 (PDF)",u:IRS("f8995")}]},
+
+/* ---------- tax ---------- */
+{id:"ttable",n:"Tax Table",full:"Tax Table / Tax Computation Worksheet",b:"tax",flows:["16"],
+ what:"Regular income tax. The Tax Table uses the midpoint of each $50 row. Qualified dividends and capital gains use the Qualified Dividends and Capital Gain Tax Worksheet.",
+ lim:[["Use the Tax Table when taxable income is","Under $100,000"]],
+ qs:["Do you have qualified dividends or capital gains? (Use the worksheet, not just the table.)"],
+ dd:"gen",links:[{t:"Form 1040 instructions (Tax Table)",u:IRS("i1040gi")}]},
+{id:"s2",n:"Schedule 2",full:"Additional Taxes",b:"tax",flows:["17 (Part I)","23 (Part II)"],
+ what:"Part I: alternative minimum tax and excess advance premium tax credit repayment. Part II: self-employment tax, additional tax on retirement plans (Form 5329), household employment taxes and others.",
+ lim:[],
+ qs:["Did you pay a household employee $2,800 or more?","Did you take an early retirement distribution?"],
+ dd:"gen",links:[{t:"Schedule 2 (PDF)",u:IRS("f1040s2")}]},
+{id:"5329",n:"Form 5329",full:"Additional Taxes on Qualified Plans and IRAs",b:"tax",flows:["Sch 2 line 8 → line 23"],
+ what:"The 10% additional tax on early distributions, and the exception codes that avoid it.",
+ lim:[["Additional tax on early distributions","10%"],["Exception 01 — separation from service","Year you turn 55 or later (employer plans only)"],["Exception 03 / 04","Total and permanent disability / death"],["Exception 05 — medical expenses","Amount over 7.5% of AGI"],["Exceptions 07, 08, 09 — IRAs only","Health insurance while unemployed · higher education · first home ($10,000 lifetime)"]],
+ qs:["Was the distribution from an IRA or from a 401(k)?","What was the money used for, and do you have records?","Was it rolled over?"],
+ dd:"gen",links:[{t:"Form 5329 (PDF)",u:IRS("f5329")},{t:"Form 5329 instructions",u:IRS("i5329")}]},
+{id:"8615",n:"Form 8615",full:"Tax for Certain Children Who Have Unearned Income (kiddie tax)",b:"tax",flows:["16"],
+ what:"Taxes a child's unearned income above the threshold at the parents' rate.",
+ lim:[["Unearned income threshold","$2,700"],["Ages covered","Under 18; 18 if earned income ≤ half of support; full-time students 19–23"]],
+ qs:["How old is the child, and are they a full-time student?","Does the child's earned income cover more than half of their support?"],
+ dd:"gen",links:[{t:"Form 8615 (PDF)",u:IRS("f8615")}]},
+{id:"8962",n:"Form 8962",full:"Premium Tax Credit",b:"tax",flows:["Sch 2 line 1a (excess APTC)","Sch 3 line 9 → line 31 (net PTC)"],
+ what:"Compares the advance premium tax credit paid to the insurer with the credit the taxpayer actually qualifies for. Extra credit is refundable; excess advance credit is repaid on Schedule 2.",
+ lim:[["Must be filed when","Form 1095-A shows advance credit"],["Married filing separately","Generally not allowed (limited exceptions)"],["Shared responsibility penalty","$0"]],
+ qs:["Do you have every 1095-A for the household?","Did household income or family size change from what you told the Marketplace?","Can anyone claim you as a dependent?"],
+ dd:"gen",links:[{t:"Form 8962 (PDF)",u:IRS("f8962")},{t:"Form 8962 instructions",u:IRS("i8962")}]},
+
+/* ---------- credits ---------- */
+{id:"8812",n:"Schedule 8812",full:"Credits for Qualifying Children and Other Dependents",b:"cred",flows:["19 (CTC / ODC)","28 (ACTC)"],
+ what:"Child tax credit and credit for other dependents (nonrefundable, line 19), and the additional child tax credit (refundable, line 28).",
+ lim:[["Child tax credit per child under 17","$2,200"],["Refundable ACTC per child","Up to $1,700"],["ACTC earned income formula","15% of earned income over $2,500"],["Credit for other dependents","$500"],["Phaseout begins (MAGI)","$200,000 ($400,000 MFJ), $50 per $1,000"],["Child's SSN","Valid for employment, issued by the return due date"],["Taxpayer SSN (new for 2025)","Required for the taxpayer, or at least one spouse if MFJ"]],
+ qs:["Does the child meet the relationship, age, residency, support and joint return tests?","Did the child live with you more than half the year? Can you show school, medical or other records?","Could anyone else claim the child (tiebreaker rules)?","Is there a signed Form 8332 for a noncustodial parent?"],
+ dd:"8867",extra:[DD.itaCtc],links:[{t:"Schedule 8812 (PDF)",u:IRS("f1040s8")},{t:"Schedule 8812 instructions",u:IRS("i1040s8")}]},
+{id:"s3",n:"Schedule 3",full:"Additional Credits and Payments",b:"cred",flows:["20 (Part I)","31 (Part II)"],
+ what:"Part I collects nonrefundable credits (foreign tax, dependent care, education, saver's, energy). Part II collects other payments and refundable credits, including the net premium tax credit.",
+ lim:[],
+ qs:["Did you pay for child care, college, energy improvements, or contribute to a retirement plan?"],
+ dd:"gen",links:[{t:"Schedule 3 (PDF)",u:IRS("f1040s3")}]},
+{id:"2441",n:"Form 2441",full:"Child and Dependent Care Expenses",b:"cred",flows:["Sch 3 line 2 → line 20","1e (taxable benefits)"],
+ what:"Nonrefundable credit for care paid so the taxpayer (and spouse) can work or look for work. Employer benefits from W-2 Box 10 are reported here even when no credit is claimed.",
+ lim:[["Qualifying expenses","$3,000 one person · $6,000 two or more"],["Credit rate","35% (AGI $15,000 or less) down to 20% (AGI over $43,000)"],["Qualifying person","Child under 13, or a spouse or dependent unable to care for self"],["Provider can't be","Your spouse, your dependent, or your child under 19"],["Refundable for 2025?","No"]],
+ qs:["Did both spouses have earned income, or was one a student or disabled?","Who provided the care? Do you have their name, address and TIN?","Are you the custodial parent? (The credit never transfers.)","Did your employer provide dependent care benefits?"],
+ dd:"gen",links:[{t:"Form 2441 (PDF)",u:IRS("f2441")},{t:"Publication 503 (Child and Dependent Care)",u:IRS("p503")}]},
+{id:"8863",n:"Form 8863",full:"Education Credits (AOTC and LLC)",b:"cred",flows:["Sch 3 line 3 → line 20 (nonrefundable)","29 (refundable AOTC)"],
+ what:"American opportunity credit (first four years, at least half-time, 40% refundable) and lifetime learning credit (any year, nonrefundable). Tax-free scholarships and Pell grants reduce the expenses you can claim, but a student can choose to include a grant in income when its terms allow it to pay living costs, which leaves tuition available for the credit.",
+ lim:[["AOTC maximum","$2,500 per student (100% of first $2,000, 25% of next $2,000)"],["AOTC refundable part","40%, up to $1,000"],["Lifetime learning credit","20% of up to $10,000 = $2,000 per return"],["MAGI phaseout (both credits)","$80,000–$90,000 single · $160,000–$180,000 MFJ"],["Married filing separately","Not allowed"],["Same student, same year","AOTC or LLC, not both"],["Refundable part not available","Some students under 24 (Form 8863, line 7)"]],
+ qs:["Did the student receive a Pell grant or other scholarship whose terms allow it to be used for room and board? Including part of it in the student's income can free up tuition for the AOTC.","Do you have Form 1098-T and receipts for books and required materials?","Is this one of the first four years of college, and was the student at least half-time?","Was the AOTC claimed for this student in four earlier years?","Were expenses paid with tax-free scholarships?"],
+ dd:"8867",extra:[DD.itaEdu],links:[{t:"Form 8863 (PDF)",u:IRS("f8863")},{t:"Form 1098-T (PDF)",u:PRIOR("f1098t")},{t:"Publication 970",u:IRS("p970")},{t:"IRS: Interaction of scholarships and tax credits",u:"https://www.irs.gov/pub/irs-utl/Interaction_of_Scholarships_and_Tax_Credits.pdf"}]},
+{id:"5695",n:"Form 5695",full:"Residential Energy Credits",b:"cred",flows:["Sch 3 line 5a / 5b → line 20"],
+ what:"Part I: residential clean energy credit (solar, wind, geothermal, battery storage). Part II: energy efficient home improvement credit. Both end after 2025.",
+ lim:[["Residential clean energy credit","30%, no annual cap (fuel cells capped)"],["Battery storage must be at least","3 kWh"],["Home improvement credit annual cap","$1,200 general + $2,000 heat pumps"],["Credit ends","Property installed or placed in service after 12/31/2025"]],
+ qs:["When was the system installed and placed in service?","Is it your home, and did you live there?","Did you receive utility rebates that reduce the cost?"],
+ dd:"gen",links:[{t:"Form 5695 (PDF)",u:IRS("f5695")},{t:"Form 5695 instructions",u:IRS("i5695")}]},
+{id:"8880",n:"Form 8880",full:"Credit for Qualified Retirement Savings Contributions (Saver's Credit)",b:"cred",flows:["Sch 3 line 4 → line 20"],
+ what:"A nonrefundable credit of 50%, 20% or 10% of retirement contributions, based on AGI.",
+ lim:[["Contributions counted","Up to $2,000 per person"],["Single / MFS: 50% / 20% / 10% AGI limits","$23,750 / $25,500 / $39,500"],["HOH: 50% / 20% / 10% AGI limits","$35,625 / $38,250 / $59,250"],["MFJ: 50% / 20% / 10% AGI limits","$47,500 / $51,000 / $79,000"],["Not eligible","Under 18, full-time students, dependents"]],
+ qs:["Are you a full-time student or someone's dependent?","Did you take any retirement distributions in the testing period?"],
+ dd:"gen",links:[{t:"Form 8880 (PDF)",u:IRS("f8880")}]},
+{id:"1116",n:"Form 1116",full:"Foreign Tax Credit",b:"cred",flows:["Sch 3 line 1 → line 20"],
+ what:"Credit for foreign income tax paid. Small amounts of passive foreign tax can go directly on Schedule 3 without the form. Taking it as a deduction on Schedule A line 6 is the alternative.",
+ lim:[["Claim without Form 1116 when foreign tax is","$300 or less ($600 MFJ), passive income only"]],
+ qs:["Was the foreign tax shown on a 1099-DIV or 1099-INT?","Would the credit or the itemized deduction be better?"],
+ dd:"gen",links:[{t:"Form 1116 (PDF)",u:IRS("f1116")}]},
+
+{id:"8839",n:"Form 8839",full:"Qualified Adoption Expenses",b:"cred",flows:["30 (refundable part)","Schedule 3, Part I (rest)"],
+ what:"Credit for the costs of adopting a child: adoption fees, court costs, attorney fees and travel. Starting in 2025, part of the credit is refundable. Employer adoption benefits are excluded from income on this form too.",
+ lim:[["Maximum credit per child","$17,280"],["Refundable part (new for 2025)","Up to $5,000"],["MAGI phaseout begins","$259,190"]],
+ qs:["Was the adoption finalized, and in what year were the expenses paid?","Is the child a U.S. or foreign adoption, or a child with special needs?","Did your employer pay any adoption expenses?"],
+ dd:"gen",links:[{t:"Form 8839 (PDF)",u:IRS("f8839")},{t:"Form 8839 instructions",u:IRS("i8839")}]},
+{id:"schr",n:"Schedule R",full:"Credit for the Elderly or the Disabled",b:"cred",flows:["Schedule 3, Part I → line 20"],
+ what:"A nonrefundable credit for people 65 or older, or under 65 and retired on permanent and total disability with taxable disability income. Low income limits apply, and nontaxable Social Security reduces the credit.",
+ lim:[["Who qualifies","Age 65+, or under 65 and retired on permanent and total disability"],["Income limits","Low AGI and nontaxable benefit limits; see the Schedule R instructions"]],
+ qs:["Were you 65 or older at the end of the year, or retired on permanent and total disability?","Do you have a physician's statement of the disability?","How much nontaxable Social Security or pension income did you receive?"],
+ dd:"gen",links:[{t:"Schedule R (PDF)",u:PRIOR("f1040sr")},{t:"Schedule R instructions",u:PRIOR("i1040sr")}]},
+{id:"8936",n:"Form 8936",full:"Clean Vehicle Credits",b:"cred",flows:["Schedule 3, Part I → line 20 (personal use)"],
+ what:"Credits for buying a new or previously owned electric or fuel cell vehicle. The credits ended for vehicles acquired after September 30, 2025. If the credit was transferred to the dealer at the time of sale, the buyer still files Form 8936.",
+ lim:[["New clean vehicle","Up to $7,500"],["Previously owned clean vehicle","Lesser of $4,000 or 30% of the price"],["MAGI limit, new (single / HOH / MFJ)","$150,000 / $225,000 / $300,000"],["MAGI limit, used (single / HOH / MFJ)","$75,000 / $112,500 / $150,000"],["Credit ends","Vehicles acquired after September 30, 2025"]],
+ qs:["When did you sign the purchase contract and make a payment? (It must be by September 30, 2025.)","Did you get the dealer's clean vehicle seller report?","Did you transfer the credit to the dealer at the time of sale?"],
+ dd:"gen",links:[{t:"Form 8936 (PDF)",u:IRS("f8936")},{t:"Form 8936 instructions",u:"https://www.irs.gov/instructions/i8936"}]},
+/* ---------- payments ---------- */
+{id:"wh",n:"Withholding",full:"Federal tax withheld (W-2 Box 2, 1099 Box 4, W-2G)",b:"pay",flows:["25a (W-2)","25b (1099)","25c (other)"],
+ what:"Income tax already paid through withholding. Added to other payments, then compared with total tax to get the refund or balance due.",
+ lim:[],
+ qs:["Does the withholding on each form match what was entered?","Was there backup withholding on any 1099?"],
+ dd:"gen",links:[{t:"Form W-4 (PDF)",u:PRIOR("fw4")}]},
+{id:"1040es",n:"1040-ES",full:"Estimated Tax for Individuals",b:"pay",flows:["26"],
+ what:"Quarterly estimated payments and any overpayment applied from last year's return.",
+ lim:[["Estimated payments generally required when tax owed is","$1,000 or more after withholding"]],
+ qs:["What dates and amounts did you pay?","Was last year's refund applied to this year?"],
+ dd:"gen",links:[{t:"Form 1040-ES (PDF)",u:PRIOR("f1040es")}]},
+{id:"eic",n:"Schedule EIC",full:"Earned Income Credit (and EIC worksheets)",b:"pay",flows:["27a"],
+ what:"Refundable credit for low and moderate income workers. Schedule EIC lists each qualifying child. Use the Pub 596 table: when AGI differs from earned income, the credit is the smaller of the two lookups.",
+ lim:[["Investment income must be","$11,950 or less"],["Maximum credit (0 / 1 / 2 / 3+ children)","$649 / $4,328 / $7,152 / $8,046"],["AGI must be less than — single / HOH","$19,104 / $50,434 / $57,310 / $61,555"],["AGI must be less than — MFJ","$26,214 / $57,554 / $64,430 / $68,675"],["Age with no qualifying child","25 to 64"],["Qualifying child age","Under 19, under 24 if full-time student, any age if disabled"]],
+ qs:["Did each child live with you in the U.S. for more than half the year? What records show that?","Could the child be claimed by someone else, and who has the higher claim under the tiebreaker rules?","Is the self-employment income reported complete and supported by records?","Was the EIC disallowed in a prior year? (Form 8862 may be needed.)"],
+ dd:"8867",extra:[DD.p596],links:[{t:"Schedule EIC (PDF)",u:IRS("f1040sei")},{t:"Publication 596 (Earned Income Credit)",u:IRS("p596")}]},
+
+{id:"excessss",n:"Excess Social Security",full:"Excess Social Security tax withheld (two or more employers)",b:"pay",flows:["Schedule 3, line 11 → line 31"],
+ what:"If you worked for two or more employers and together they withheld more Social Security tax than the yearly maximum, the extra is a refundable credit. If a single employer withheld too much, ask that employer for the refund instead.",
+ lim:[["Maximum employee Social Security tax (6.2% of $176,100)","$10,918.20"],["Applies only with","Two or more employers"]],
+ qs:["Did you have more than one employer during the year?","Do the W-2s show Social Security tax (Box 4) adding up to more than the maximum?"],
+ dd:"gen",links:[{t:"Schedule 3 (PDF)",u:IRS("f1040s3")}]},
+/* ---------- supporting ---------- */
+{id:"8867",n:"Form 8867",full:"Paid Preparer's Due Diligence Checklist",b:"supp",flows:["Filed with the return"],
+ what:"Required when a paid preparer's return claims the EIC, CTC/ACTC/ODC, AOTC, or head of household status. Covers the four due diligence requirements: complete Form 8867, compute the credits, meet the knowledge requirement, and keep records for 3 years.",
+ lim:[["Penalty per failure (2025 returns)","$650"],["Maximum per return (all four benefits)","$2,600"],["Record retention","3 years"]],
+ qs:["Did you interview the taxpayer and ask more questions when information seemed incorrect, inconsistent or incomplete?","Did you document the questions and the taxpayer's answers at the time?","Did you see documents that show residency and relationship when needed?"],
+ dd:"8867",links:[]},
+{id:"hoh",n:"Head of household",full:"Filing status (checked on page 1)",b:"supp",flows:["Filing status · standard deduction 12e"],
+ what:"Unmarried or considered unmarried, paid more than half the cost of keeping up a home, and a qualifying person lived there more than half the year (a dependent parent may live elsewhere).",
+ lim:[["Paid more than","Half the cost of keeping up the home"],["Considered unmarried","Spouse didn't live in the home the last 6 months"],["Qualifying relative gross income limit","$5,200"]],
+ qs:["Who lives in the home, and who pays the rent, utilities, food and repairs?","Are you married? When did your spouse last live in the home?","Is the qualifying person related to you? (A friend or girlfriend's child doesn't qualify.)"],
+ dd:"8867",extra:[DD.p501],links:[{t:"Publication 501 (Filing Status)",u:IRS("p501")}]},
+{id:"8332",n:"Form 8332",full:"Release/Revocation of Release of Claim to Exemption for Child by Custodial Parent",b:"supp",flows:["Schedule 8812 (noncustodial parent)"],
+ what:"Lets the custodial parent release the child to the noncustodial parent for the dependency, CTC, ACTC and ODC. HOH, EIC and the dependent care credit stay with the custodial parent.",
+ lim:[["Transfers","Dependency, CTC / ACTC / ODC only"],["Never transfers","Head of household, EIC, dependent care credit"]],
+ qs:["Did the child spend more nights with you?","Do you have the signed Form 8332 (or a pre-2009 decree page)?"],
+ dd:"gen",links:[{t:"Form 8332 (PDF)",u:IRS("f8332")}]},
+{id:"8606",n:"Form 8606",full:"Nondeductible IRAs",b:"supp",flows:["4b (taxable IRA amount)"],
+ what:"Tracks basis from nondeductible traditional IRA contributions so that part comes back tax-free, and reports Roth conversions and Roth distributions.",
+ lim:[["File when","Making a nondeductible contribution or taking a distribution with basis"]],
+ qs:["Have you ever made nondeductible contributions?","Do you have prior years' Forms 8606?"],
+ dd:"gen",links:[{t:"Form 8606 (PDF)",u:IRS("f8606")}]},
+{id:"dep",n:"Dependents",full:"Qualifying child and qualifying relative tests",b:"supp",flows:["Dependents section, page 1","8812 · EIC · 2441 · HOH"],
+ what:"Who can be claimed. First three tests for everyone: dependent taxpayer, joint return, citizen or resident. Then the qualifying child or qualifying relative tests.",
+ lim:[["Qualifying child age","Under 19, under 24 if a full-time student, any age if disabled; younger than you"],["Qualifying relative gross income","Less than $5,200"],["Support test, qualifying relative","You provide more than half"],["Tiebreaker","Parent first · more nights · higher AGI"]],
+ qs:["Who did the child live with, and for how many nights?","Is anyone else claiming this person?","Did the dependent file a joint return only to get a refund of withholding?"],
+ dd:"8867",extra:[DD.p501,DD.itaCtc],links:[{t:"Publication 501 (Dependents)",u:IRS("p501")}]},
+{id:"1040sr",n:"1040-SR",full:"U.S. Tax Return for Seniors",b:"supp",flows:["Replaces Form 1040"],
+ what:"Same lines as Form 1040 in larger print, with a standard deduction chart on the form.",
+ lim:[["Available if born before","January 2, 1961"]],
+ qs:["Was either spouse born before January 2, 1961?"],
+ dd:"gen",links:[{t:"Form 1040-SR (PDF)",u:IRS("f1040s")}]},
+{id:"8888",n:"Form 8888",full:"Allocation of Refund",b:"supp",flows:["35a"],
+ what:"Splits a refund among up to three accounts or buys Series I savings bonds.",
+ lim:[["Accounts","Up to 3"]],
+ qs:["Are the routing and account numbers in your name?"],
+ dd:"gen",links:[{t:"Form 8888 (PDF)",u:IRS("f8888")}]}
+];
+
+/* tax year 2024 changes to the base cards */
+const PATCH = {"w2": {"lim": [["Social Security wage base (Box 3)", "$168,600"], ["Dependent care benefits excluded (Box 10)", "$5,000 ($2,500 MFS)"], ["401(k) deferral limit (Box 12 D)", "$23,000 (+$7,500 age 50+)"]]}, "w2g": {"lim": [["Gambling losses deductible up to", "Total winnings (itemizers only)"]]}, "s1": {"lim": [["Alimony is income / deductible only if the decree is dated", "Before January 1, 2019"], ["Educator expenses", "$300 each ($600 MFJ if both educators)"]]}, "sse": {"lim": [["SE tax rate", "15.3% on 92.35% of net earnings"], ["Social Security part stops at", "$168,600 combined wages and SE earnings"], ["Filing threshold", "$400 net earnings"]]}, "1098e": {"lim": [["Maximum deduction", "$2,500"], ["MAGI phaseout, single / HOH", "$80,000–$95,000"], ["MAGI phaseout, MFJ", "$165,000–$195,000"], ["Married filing separately", "Not allowed"]]}, "ira": {"lim": [["Contribution limit", "$7,000 ($8,000 age 50+), not more than compensation"], ["Phaseout, covered by plan, single / HOH", "$77,000–$87,000 MAGI"], ["Phaseout, covered by plan, MFJ", "$123,000–$143,000 MAGI"], ["Phaseout, not covered but spouse is", "$230,000–$240,000 MAGI"], ["Phaseout, married filing separately (covered)", "$0–$10,000 MAGI"], ["Roth IRA phaseout", "$146,000–$161,000 single · $230,000–$240,000 MFJ"], ["Contribution deadline", "Return due date (no extensions)"]]}, "std": {"full": "Line 12 (worksheet in the 1040 instructions)", "flows": ["12"], "lim": [["Single / MFS", "$14,600"], ["Married filing jointly / QSS", "$29,200"], ["Head of household", "$21,900"], ["Additional, age 65+ or blind (single / HOH)", "$1,950 each"], ["Additional, age 65+ or blind (married)", "$1,550 each"], ["Dependent's standard deduction", "Greater of $1,300 or earned income + $450"]], "qs": ["Were you or your spouse born before January 2, 1960, or blind?", "Can anyone claim you as a dependent?", "If married filing separately, does your spouse itemize? (Then you must too.)"]}, "sa": {"flows": ["12"], "lim": [["Medical expenses deductible above", "7.5% of AGI"], ["State and local tax (SALT) cap", "$10,000 ($5,000 MFS)"], ["Mortgage debt limit (after 12/15/2017)", "$750,000 ($375,000 MFS)"], ["Mortgage debt limit (on or before 12/15/2017)", "$1,000,000 ($500,000 MFS)"], ["Gambling losses", "Up to winnings"], ["Cash gifts to public charities", "Up to 60% of AGI"], ["Noncash gifts need Form 8283 when over", "$500"]]}, "s1a": {"remove": true}, "2441": {"lim": [["Qualifying expenses", "$3,000 one person · $6,000 two or more"], ["Credit rate", "35% (AGI $15,000 or less) down to 20% (AGI over $43,000)"], ["Qualifying person", "Child under 13, or a spouse or dependent unable to care for self"], ["Provider can't be", "Your spouse, your dependent, or your child under 19"], ["Refundable for 2024?", "No"]]}, "8995": {"flows": ["13"], "lim": [["Deduction rate", "20% of qualified business income"], ["Simplified form usable below taxable income of", "$191,950 ($383,900 MFJ)"]]}, "s2": {"qs": ["Did you pay a household employee, such as a nanny or housekeeper, enough to owe household employment taxes?", "Did you take an early retirement distribution?"]}, "8615": {"lim": [["Unearned income threshold", "$2,600"], ["Ages covered", "Under 18; 18 if earned income ≤ half of support; full-time students 19–23"]]}, "8812": {"lim": [["Child tax credit per child under 17", "$2,000"], ["Refundable ACTC per child", "Up to $1,700"], ["ACTC earned income formula", "15% of earned income over $2,500"], ["Credit for other dependents", "$500"], ["Phaseout begins (MAGI)", "$200,000 ($400,000 MFJ), $50 per $1,000"], ["Child's SSN", "Valid for employment, issued by the return due date"]]}, "5695": {"what": "Part I: residential clean energy credit (solar, wind, geothermal, battery storage). Part II: energy efficient home improvement credit.", "lim": [["Residential clean energy credit", "30%, no annual cap (fuel cells capped)"], ["Battery storage must be at least", "3 kWh"], ["Home improvement credit annual cap", "$1,200 general + $2,000 heat pumps"]]}, "8880": {"lim": [["Contributions counted", "Up to $2,000 per person"], ["Single / MFS: 50% / 20% / 10% AGI limits", "$23,000 / $25,000 / $38,250"], ["HOH: 50% / 20% / 10% AGI limits", "$34,500 / $37,500 / $57,375"], ["MFJ: 50% / 20% / 10% AGI limits", "$46,000 / $50,000 / $76,500"], ["Not eligible", "Under 18, full-time students, dependents"]]}, "eic": {"flows": ["27"], "lim": [["Investment income must be", "$11,600 or less"], ["Maximum credit (0 / 1 / 2 / 3+ children)", "$632 / $4,213 / $6,960 / $7,830"], ["AGI must be less than — single / HOH", "$18,591 / $49,084 / $55,768 / $59,899"], ["AGI must be less than — MFJ", "$25,511 / $56,004 / $62,688 / $66,819"], ["Age with no qualifying child", "25 to 64"], ["Qualifying child age", "Under 19, under 24 if full-time student, any age if disabled"]]}, "8839": {"flows": ["Schedule 3, Part I (nonrefundable)"], "what": "Credit for the costs of adopting a child: adoption fees, court costs, attorney fees and travel. For 2024 the credit is nonrefundable; unused credit carries forward up to five years. Employer adoption benefits are excluded from income on this form too.", "lim": [["Maximum credit per child", "$16,810"], ["Refundable part", "None for 2024"], ["MAGI phaseout", "$252,150–$292,150"]]}, "8936": {"what": "Credits for buying a new or previously owned electric or fuel cell vehicle. Starting in 2024, buyers could transfer the credit to the dealer at the time of sale; the buyer still files Form 8936.", "lim": [["New clean vehicle", "Up to $7,500"], ["Previously owned clean vehicle", "Lesser of $4,000 or 30% of the price"], ["MAGI limit, new (single / HOH / MFJ)", "$150,000 / $225,000 / $300,000"], ["MAGI limit, used (single / HOH / MFJ)", "$75,000 / $112,500 / $150,000"]], "qs": ["Did you get the dealer's clean vehicle seller report?", "Did you transfer the credit to the dealer at the time of sale?", "Was your modified AGI under the limit in 2024 or 2023? (Either year counts.)"]}, "excessss": {"lim": [["Maximum employee Social Security tax (6.2% of $168,600)", "$10,453.20"], ["Applies only with", "Two or more employers"]]}, "8867": {"lim": [["Penalty per failure (2024 returns, filed in 2025)", "$635"], ["Maximum per return (all four benefits)", "$2,540"], ["Record retention", "3 years"]]}, "hoh": {"flows": ["Filing status · standard deduction 12"], "lim": [["Paid more than", "Half the cost of keeping up the home"], ["Considered unmarried", "Spouse didn't live in the home the last 6 months"], ["Qualifying relative gross income limit", "$5,050"]]}, "dep": {"lim": [["Qualifying child age", "Under 19, under 24 if a full-time student, any age if disabled; younger than you"], ["Qualifying relative gross income", "Less than $5,050"], ["Support test, qualifying relative", "You provide more than half"], ["Tiebreaker", "Parent first · more nights · higher AGI"]]}, "1040sr": {"lim": [["Available if born before", "January 2, 1960"]], "qs": ["Was either spouse born before January 2, 1960?"]}};
+const ADD = [];
+const BL = {"ded": "Lines 12 and 13", "pay": "Lines 25\u201331"}, BD = {"ded": "Standard or itemized deduction, then the qualified business income deduction."};
+F = F.filter(f=>!(PATCH[f.id]&&PATCH[f.id].remove)).map(f=>Object.assign({},f,PATCH[f.id]||{}));
+ADD.forEach(a=>{const i=F.findIndex(f=>f.id===a.after);F.splice(i<0?F.length:i+1,0,a)});
+BRANCHES.forEach(b=>{if(BL[b.id])b.lines=BL[b.id];if(BD[b.id])b.bd=BD[b.id]});
+
+/* "Also feeds here" shortcuts for forms that land in more than one branch */
+const ALSO = {"pay": ["8812", "8863", "8962"], "cred": ["eic"], "ded": ["w2g"], "tax": ["sse", "5329"]};
+
+const byId = Object.fromEntries(F.map(f=>[f.id,f]));
+const map = document.getElementById('map');
+const stage = document.getElementById('stage');
+const drawer = document.getElementById('drawer');
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function leafHTML(f){
+  const has = f.lim && f.lim.length, dd = f.dd==="8867";
+  return `<button class="leaf${has?' has-limit':''}${dd?' is-dd':''}" data-id="${f.id}" aria-label="${esc(f.n+': '+f.full)}">
+    <span class="fn">${esc(f.n)}</span><span class="ln">${esc(f.flows[0])}</span>
+    <span class="marks">${has?'<i class="dot" style="background:var(--hl)"></i>':''}${dd?'<i class="dot" style="background:var(--dd)"></i>':''}</span></button>`;
+}
+BRANCHES.forEach(b=>{
+  const el = document.createElement('section');
+  el.className = 'branch'+(b.id==='supp'?' b-supp':'');
+  el.style.gridArea = b.id; el.dataset.branch = b.id;
+  const also = (ALSO[b.id]||[]).map(id=>`<button data-id="${id}">${esc(byId[id].n)}</button>`).join('');
+  el.innerHTML = `<h2>${esc(b.name)}</h2><div class="lines">${esc(b.lines)}</div><p class="bd">${esc(b.bd)}</p>
+    <div class="leaves">${F.filter(f=>f.b===b.id).map(leafHTML).join('')}</div>
+    ${also?`<div class="also">Also lands here: ${also}</div>`:''}`;
+  map.appendChild(el);
+});
+
+/* limits table */
+const tb = document.getElementById('ltbody');
+tb.innerHTML = F.filter(f=>f.lim.length).map(f=>f.lim.map((l,i)=>`<tr>${i===0?`<td class="form" rowspan="${f.lim.length}"><button data-id="${f.id}">${esc(f.n)}</button></td>`:''}<td>${esc(l[0])}</td><td class="amt"><span class="hl">${esc(l[1])}</span></td></tr>`).join('')).join('');
+
+function linkList(arr){return arr.map(l=>`<a href="${l.u}" target="_blank" rel="noopener">${esc(l.t)}</a>`).join('')}
+function open(id){
+  const f = byId[id]; if(!f) return;
+  document.querySelectorAll('.leaf').forEach(x=>x.setAttribute('aria-current', x.dataset.id===id?'true':'false'));
+  const is8867 = f.dd==="8867";
+  const ddLinks = is8867 ? [...DD8867,...(f.extra||[])] : DDGEN;
+  drawer.innerHTML = `<button class="close" id="cls">Close</button>
+    <div class="tag">${esc(BRANCHES.find(b=>b.id===f.b).name)}</div>
+    <h3>${esc(f.n)}</h3><p class="full">${esc(f.full)}</p>
+    <div class="flows">${f.flows.map(x=>`<span>→ ${esc(x)}</span>`).join('')}</div>
+    <p style="margin:0;font-size:14.5px">${esc(f.what)}</p>
+    ${f.lim.length?`<div class="sec"><h4>2024 limits</h4><ul class="limits">${f.lim.map(l=>`<li>${esc(l[0])}: <span class="hl">${esc(l[1])}</span></li>`).join('')}</ul></div>`:''}
+    <div class="sec"><h4>Due diligence</h4><div class="ddbox">
+      ${is8867?'<span class="ddbadge">Form 8867 required</span>':''}
+      <ul>${f.qs.map(q=>`<li>${esc(q)}</li>`).join('')}</ul>
+      <p class="note">${is8867?'Official questions: Form 8867 and its instructions. Penalty $635 per failure. VITA/TCE volunteers also use Form 13614-C and Publication 4012.':'Interview questions to ask (study aid). VITA/TCE volunteers start from the Form 13614-C intake sheet and Publication 4012. General preparer diligence: Circular 230 §10.22.'}</p>
+      <div class="links" style="margin-top:8px">${linkList(ddLinks)}</div></div></div>
+    ${f.links.length?`<div class="sec"><h4>Official form &amp; instructions</h4><div class="links">${linkList(f.links)}</div></div>`:''}`;
+  drawer.hidden = false; stage.classList.add('open');
+  document.getElementById('cls').onclick = close;
+  try{ if(location.hash!=='#'+id) history.replaceState(null,'','#'+id);}catch(e){}
+  if(window.innerWidth<1080) drawer.scrollIntoView({behavior:'smooth',block:'start'});
+  requestAnimationFrame(drawWires);
+}
+function close(){drawer.hidden=true;stage.classList.remove('open');document.querySelectorAll('.leaf').forEach(x=>x.setAttribute('aria-current','false'));try{history.replaceState(null,'',location.pathname+location.search)}catch(e){};requestAnimationFrame(drawWires)}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b&&!b.closest('#drawer'))open(b.dataset.id)});
+
+/* toggles */
+function tog(btn,cls){btn.onclick=()=>{const on=btn.getAttribute('aria-pressed')!=='true';btn.setAttribute('aria-pressed',on);map.classList.toggle(cls,on)}}
+tog(document.getElementById('tHl'),'show-hl');tog(document.getElementById('tDd'),'show-dd');
+
+/* search */
+document.getElementById('q').addEventListener('input',e=>{
+  const q=e.target.value.trim().toLowerCase();
+  document.querySelectorAll('.leaf').forEach(l=>{
+    if(!q){l.classList.remove('dim');return}
+    const f=byId[l.dataset.id];
+    const hay=[f.n,f.full,f.what,...f.flows,...f.lim.flat(),...f.qs].join(' ').toLowerCase();
+    l.classList.toggle('dim',!hay.includes(q));
+  });
+});
+
+/* connector wires (wide layout only) */
+const wires=document.getElementById('wires');
+function drawWires(){
+  if(window.innerWidth<1080){wires.innerHTML='';return}
+  const m=map.getBoundingClientRect(),h=document.getElementById('hub').getBoundingClientRect();
+  const hy=h.top+h.height/2-m.top;
+  let d='';
+  map.querySelectorAll('.branch').forEach(b=>{
+    const r=b.getBoundingClientRect();
+    if(b.dataset.branch==='supp'){const x=h.left+h.width/2-m.left;d+=`M${x},${h.bottom-m.top} L${x},${r.top-m.top}`;return}
+    const by=r.top-m.top+22;
+    const left=r.right<h.left;
+    const x1=left?h.left-m.left:h.right-m.left, x2=left?r.right-m.left:r.left-m.left, mx=(x1+x2)/2;
+    d+=`M${x1},${hy} C${mx},${hy} ${mx},${by} ${x2},${by} `;
+  });
+  wires.innerHTML=`<path d="${d}"/>`;
+}
+addEventListener('resize',drawWires);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(drawWires);
+drawWires();
+
+/* deep link */
+function fromHash(){const id=location.hash.slice(1);if(byId[id])open(id)}
+addEventListener('hashchange',fromHash);fromHash();
+</script>
+
+</body>
+</html>
